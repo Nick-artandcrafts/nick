@@ -1176,15 +1176,36 @@ window.addEventListener('scroll', () => {
 </script>
 <script>
 window._orderItem = function(item) {
-  // Map firebase-data item fields to what openModal expects
-  openModal({
-    name:      item.title,
-    catLabel:  item.cat || '',
-    desc:      item.desc || '',
-    price:     item.price || 0,
-    available: item.available !== false,
-    details:   [],  // add fields here if you store them in Firestore
-  });
+  // For Firestore items: show real image, not generated SVG art
+  const imgHtml = item.imageUrl
+    ? `<img src="${item.imageUrl}" style="width:100%;display:block;max-height:360px;object-fit:cover;" />`
+    : '';
+  document.getElementById('modalImgWrap').innerHTML = imgHtml;
+  document.getElementById('modalName').textContent  = item.title || '';
+  document.getElementById('modalCat').textContent   = item.cat   || '';
+  document.getElementById('modalDesc').textContent  = item.desc  || '';
+
+  // Build detail chips from whatever fields exist in Firestore
+  const chips = [];
+  if (item.size)     chips.push({ label: 'Size',     val: item.size });
+  if (item.material) chips.push({ label: 'Material', val: item.material });
+  if (item.care)     chips.push({ label: 'Care',     val: item.care });
+  if (item.time)     chips.push({ label: 'Made in',  val: item.time });
+  document.getElementById('modalDetails').innerHTML = chips
+    .map(d => `<div class="modal-detail"><strong>${d.label}</strong>${d.val}</div>`)
+    .join('');
+
+  const avail = item.available !== false;
+  const priceEl = document.getElementById('modalPrice');
+  priceEl.textContent = '$' + (item.price || 0);
+  priceEl.className = 'modal-price' + (avail ? '' : ' sold');
+
+  const buyBtn = document.getElementById('modalBuy');
+  buyBtn.textContent = avail ? 'Order via DM ✦' : 'Sold — Custom Order Available';
+  buyBtn.style.opacity = avail ? '1' : '0.6';
+
+  document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
 };
 </script>
 </body>
