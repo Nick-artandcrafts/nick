@@ -596,6 +596,51 @@ section { padding: 6rem 2rem; }
   font-style: italic; color: var(--rose); font-size: 0.95rem;
 }
 
+/* ===== TERMS OF SERVICE ===== */
+.tos-section {
+  background: linear-gradient(135deg, var(--blush) 0%, var(--lavender) 50%, var(--warm) 100%);
+  position: relative; overflow: hidden;
+}
+.tos-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='28' font-size='18' fill='%23e8829a' fill-opacity='0.07'%3E✦%3C/text%3E%3C/svg%3E");
+}
+.tos-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+.tos-intro { text-align: center; margin-bottom: 3rem; }
+.tos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.tos-card {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(10px);
+  border-radius: 20px; padding: 1.8rem 1.6rem;
+  border: 1.5px solid rgba(231,160,185,0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.tos-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(196,96,122,0.14); }
+.tos-card-header {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.tos-icon { font-size: 1.6rem; line-height: 1; }
+.tos-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--deep);
+}
+.tos-card p, .tos-card ul { font-size: 0.95rem; font-weight: 600; color: var(--mid); line-height: 1.7; }
+.tos-card ul { list-style: none; }
+.tos-card ul li { padding: 0.2rem 0; display: flex; align-items: flex-start; gap: 0.5rem; }
+.tos-card ul li::before { content: '✦'; font-size: 0.6rem; color: var(--rose); flex-shrink: 0; margin-top: 0.35rem; }
+.tos-dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.tos-dos h4, .tos-donts h4 {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 0.6rem;
+}
+.tos-dos h4 { color: #4a9e6e; }
+.tos-donts h4 { color: var(--dusty); }
+.tos-dos li::before { content: '✓'; color: #4a9e6e !important; font-weight: 700; font-size: 0.75rem !important; }
+.tos-donts li::before { content: '✕'; color: var(--dusty) !important; font-weight: 700; font-size: 0.75rem !important; }
+.tos-full { grid-column: 1 / -1; }
+
 /* ===== FOOTER ===== */
 footer {
   text-align: center; padding: 2rem;
@@ -641,9 +686,10 @@ footer a { color: var(--pink); text-decoration: none; }
   <a class="nav-logo" href="index.html"><span data-nick="name">Nick</span> <span>✦</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#pricing">Customs</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#tos">Terms</a></li>
   </ul>
   <a class="nav-back" href="index.html">← All of Nick</a>
 </nav>
@@ -675,7 +721,7 @@ footer a { color: var(--pink); text-decoration: none; }
   </div>
 
   <div class="hero-content">
-    <p class="hero-eyebrow">✦ Digital Art & Illustrations ✦</p>
+    <p class="hero-eyebrow" style="font-size:1.25rem;font-weight:700;font-style:normal;">✦ Digital Art & Illustrations ✦</p>
     <h1 class="hero-title"><span data-nick="name">Nick the</span><br><em>Drawer</em></h1>
     <p class="hero-sub">Where imagination blooms into digital beauty —<br>every pixel painted with heart</p>
     <div class="hero-cta">
@@ -749,7 +795,7 @@ footer a { color: var(--pink); text-decoration: none; }
     </div>
 
     <div class="about-text reveal-right">
-      <span class="section-tag">✦ About the Artist</span>
+      <span class="section-tag">✦ About Me</span>
       <h2 class="section-title" data-nick="about-heading">Hello, I'm <em>Nick!</em></h2>
       <p class="about-bio" data-nick="about-bio1">
         I'm a digital artist with a passion for soft, dreamy illustrations that tell stories through colour and light. My art lives in the space between fantasy and emotion — characters with big feelings, florals that breathe, and worlds you'd want to step into.
@@ -782,10 +828,10 @@ footer a { color: var(--pink); text-decoration: none; }
 <section id="pricing" class="pricing-section">
   <div class="pricing-inner">
     <div class="pricing-intro reveal">
-      <span class="section-tag">✦ Commission Pricing</span>
-      <h2 class="section-title">Bring Your <em>Vision</em> to Life</h2>
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mid);max-width:500px;margin:0 auto;">
-        Each piece is crafted with intention and love. Prices reflect hours of detail work — you're getting something truly one-of-a-kind.
+      <span class="section-tag" style="font-size:1.1rem;font-weight:700;font-style:normal;">✦ Commission Pricing</span>
+      <h2 class="section-title">Bring Your <em>creative ideas</em> to life with me</h2>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;font-weight:700;color:var(--mid);max-width:500px;margin:0 auto;">
+        Come share your imagination with me, and let me bring it to life for you~
       </p>
     </div>
 
@@ -870,8 +916,8 @@ footer a { color: var(--pink); text-decoration: none; }
     </div>
 
     <div style="text-align:center;margin-top:3rem;" class="reveal">
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--mid);font-size:0.95rem;margin-bottom:1.2rem;">
-        ✦ Additional characters +50% of base price &nbsp;|&nbsp; Rushed commissions (under 48h) +30% &nbsp;✦
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--mid);font-size:1.1rem;font-weight:600;margin-bottom:1.2rem;">
+        ✦ Additional characters +45% of base price &nbsp;|&nbsp; Rushed commissions (under 48h) +45% &nbsp;✦
       </p>
       <a href="#contact" class="btn btn-primary">Commission Now</a>
     </div>
@@ -890,9 +936,9 @@ footer a { color: var(--pink); text-decoration: none; }
 <section id="gallery" style="padding:6rem 2rem;">
   <div class="gallery-section">
     <div class="gallery-intro reveal">
-      <span class="section-tag">✦ Portfolio</span>
+      <span class="section-tag" style="font-size:1.1rem;font-weight:700;font-style:normal;">✦ Portfolio</span>
       <h2 class="section-title">The <em>Gallery</em></h2>
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mid);">
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;font-weight:700;color:var(--mid);">
         A collection of dreams painted in pixels
       </p>
     </div>
@@ -901,11 +947,6 @@ footer a { color: var(--pink); text-decoration: none; }
       <!-- Gallery items - art placeholders with rich CSS illustrations -->
     </div>
 
-    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--mid);font-size:0.95rem;margin-bottom:1.2rem;">
-        ✦ Upload your own art via the Admin Panel ✦
-      </p>
-    </div>
   </div>
 </section>
 
@@ -914,7 +955,7 @@ footer a { color: var(--pink); text-decoration: none; }
   <div class="contact-inner">
     <span class="section-tag">✦ Let's Connect</span>
     <h2 class="section-title">Find Nick</h2>
-    <p class="contact-sub">Drop a message, commission request, or just say hi —<br>every message is read with care</p>
+    <p class="contact-sub">Drop a message, commission request, or just say hi,<br>every message is read with care</p>
 
     <div class="social-links reveal stagger">
       <a href="#" class="social-link insta" data-nick="insta-url">
@@ -950,8 +991,87 @@ footer a { color: var(--pink); text-decoration: none; }
   </div>
 </section>
 
+<!-- TERMS OF SERVICE -->
+<section id="tos" class="tos-section">
+  <div class="tos-inner">
+    <div class="tos-intro reveal">
+      <span class="section-tag">✦ Before We Begin</span>
+      <h2 class="section-title">Terms of <em>Service</em></h2>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mid);">
+        Please read through these before placing a commission — thank you so much! ✦
+      </p>
+    </div>
+
+    <div class="tos-grid stagger">
+
+      <!-- Payment -->
+      <div class="tos-card">
+        <div class="tos-card-header">
+          <div class="tos-card-title">Method of Payment</div>
+        </div>
+        <ul>
+          <li>PayPal</li>
+          <li>Google Pay</li>
+        </ul>
+      </div>
+
+      <!-- Payment Policy -->
+      <div class="tos-card">
+        <div class="tos-card-header">
+          <div class="tos-card-title">Payment Policy</div>
+        </div>
+        <ul>
+          <li>Full payment must be made upfront before work begins</li>
+          <li>No refunds once the sketch has been approved</li>
+          <li>Add-ons will incur extra charges — these will be discussed during project finalisation</li>
+        </ul>
+      </div>
+
+      <!-- TAT -->
+      <div class="tos-card">
+        <div class="tos-card-header">
+          <div class="tos-card-title">Turnaround Time</div>
+        </div>
+        <p>7–14 days depending on project complexity. Rushed commissions (under 48h) are available at an extra charge.</p>
+      </div>
+
+      <!-- Dos & Don'ts -->
+      <div class="tos-card tos-full">
+        <div class="tos-card-header">
+          <div class="tos-card-title">What I Draw & What I Don't</div>
+        </div>
+        <div class="tos-dos-donts">
+          <div class="tos-dos">
+            <h4>✓ I will draw</h4>
+            <ul>
+              <li>Anime</li>
+              <li>Semi-realism</li>
+              <li>Animals</li>
+              <li>Disney style</li>
+              <li>Semi-chibis</li>
+              <li>Simple backgrounds</li>
+            </ul>
+          </div>
+          <div class="tos-donts">
+            <h4>✕ I won't draw</h4>
+            <ul>
+              <li>Hyper-realism</li>
+              <li>Gore</li>
+              <li>Mecha</li>
+              <li>Furries</li>
+              <li>Complex backgrounds</li>
+              <li>NSFW content</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <footer>
-  <p>© 2025 Nick the Drawer &nbsp;✦&nbsp; Made with care &nbsp;|&nbsp; <a href="index.html">← Back to Nick's World</a></p>
+  <p>© 2025 Nick the Drawer &nbsp;✦&nbsp; Made with care &nbsp;|&nbsp; <a href="index.html">Back to Nick's World</a></p>
 </footer>
 <script src="firebase-data.js"></script>
 <script>

@@ -540,6 +540,51 @@ section { padding: 6rem 2rem; }
 .stagger-shop.visible > *:nth-child(7){opacity:1;transform:none;transition-delay:0.47s}
 .stagger-shop.visible > *:nth-child(8){opacity:1;transform:none;transition-delay:0.54s}
 
+/* ===== TERMS OF SERVICE ===== */
+.tos-section {
+  background: linear-gradient(135deg, #eef8f2 0%, var(--sand) 50%, #e8f5ee 100%);
+  position: relative; overflow: hidden;
+}
+.tos-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='28' font-size='18' fill='%238ec4a8' fill-opacity='0.1'%3E✦%3C/text%3E%3C/svg%3E");
+}
+.tos-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+.tos-intro { text-align: center; margin-bottom: 3rem; }
+.tos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.tos-card {
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(10px);
+  border-radius: 20px; padding: 1.8rem 1.6rem;
+  border: 1.5px solid rgba(142,196,168,0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.tos-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(58,138,110,0.13); }
+.tos-card-header {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.tos-icon { font-size: 1.6rem; line-height: 1; }
+.tos-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--deep);
+}
+.tos-card p, .tos-card ul { font-size: 0.95rem; font-weight: 600; color: var(--mid); line-height: 1.7; }
+.tos-card ul { list-style: none; }
+.tos-card ul li { padding: 0.2rem 0; display: flex; align-items: flex-start; gap: 0.5rem; }
+.tos-card ul li::before { content: '✦'; font-size: 0.6rem; color: var(--moss); flex-shrink: 0; margin-top: 0.35rem; }
+.tos-dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.tos-dos h4, .tos-donts h4 {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 0.6rem;
+}
+.tos-dos h4 { color: var(--teal); }
+.tos-donts h4 { color: #c05060; }
+.tos-dos li::before { content: '✓'; color: var(--teal) !important; font-weight: 700; font-size: 0.75rem !important; }
+.tos-donts li::before { content: '✕'; color: #c05060 !important; font-weight: 700; font-size: 0.75rem !important; }
+.tos-full { grid-column: 1 / -1; }
+
 footer { text-align: center; padding: 2rem; background: var(--deep); color: rgba(255,255,255,0.3); font-size: 0.78rem; letter-spacing: 0.1em; }
 footer a { color: var(--mint); text-decoration: none; }
 
@@ -583,9 +628,10 @@ footer a { color: var(--mint); text-decoration: none; }
   <a class="nav-logo" href="index.html"><span data-nick="name">Nick</span> <span>✦</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#pricing">Customs</a></li>
     <li><a href="#shop">Shop</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#tos">Terms</a></li>
   </ul>
   <a class="nav-back" href="index.html">← All of Nick</a>
 </nav>
@@ -632,11 +678,11 @@ footer a { color: var(--mint); text-decoration: none; }
   </svg>
 
   <div class="hero-content">
-    <p class="hero-eyebrow">✦ Handcrafted Crochet Creations ✦</p>
+    <p class="hero-eyebrow" style="font-size:1.25rem;font-weight:700;font-style:normal;">✦ Handcrafted Creations ✦</p>
     <h1 class="hero-title"><span data-nick="name">Nick Crafts</span><br><em>Heaven</em></h1>
-    <p class="hero-sub">Each stitch made with love, each piece a little hug<br>you can hold in your hands</p>
+    <p class="hero-sub">Handmade pieces crafted with care<br> Soft details and careful stitches</p>
     <div class="hero-cta">
-      <a href="#shop" class="btn btn-primary">Browse the Shop</a>
+      <a href="#shop" class="btn btn-primary">My Shop</a>
       <a href="#pricing" class="btn btn-outline">Custom Orders</a>
     </div>
   </div>
@@ -709,7 +755,7 @@ footer a { color: var(--mint); text-decoration: none; }
     </div>
 
     <div class="reveal-right">
-      <span class="section-tag">✦ About the Maker</span>
+      <span class="section-tag">✦ About Me</span>
       <h2 class="section-title" data-nick="about-heading">Hey, it's <em>Nick!</em></h2>
       <p class="about-bio" data-nick="about-bio1">I've been crocheting since I was a kid, and I never stopped. There's something magical about turning a single strand of yarn into something soft, squishy, and full of personality — whether it's an amigurumi frog with tiny legs or a cosy cardigan that feels like a hug.</p>
       <p class="about-bio" data-nick="about-bio2">Every item in this shop is handmade by me, with care and a silly amount of love. Custom orders welcome — if you can dream it, I can (probably) crochet it!</p>
@@ -740,9 +786,9 @@ footer a { color: var(--mint); text-decoration: none; }
 <section id="pricing" class="pricing-section">
   <div class="pricing-inner">
     <div class="pricing-intro reveal">
-      <span class="section-tag">✦ Custom Order Pricing</span>
+      <span class="section-tag" style="font-size:1.1rem;font-weight:700;font-style:normal;">✦ Custom Order Pricing</span>
       <h2 class="section-title">Made Just <em>for You</em></h2>
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mid);max-width:500px;margin:0 auto;">
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;font-weight:600;color:var(--mid);max-width:500px;margin:0 auto;">
         All custom work is priced to reflect the time, yarn, and love that goes in. Ready-made items have individual prices in the shop below.
       </p>
     </div>
@@ -827,8 +873,8 @@ footer a { color: var(--mint); text-decoration: none; }
     </div>
 
     <div style="text-align:center;margin-top:3rem;" class="reveal">
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--mid);font-size:0.95rem;margin-bottom:1.2rem;">
-        ✦ Yarn cost included unless premium yarn is requested &nbsp;|&nbsp; Shipping calculated at checkout ✦
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--mid);font-size:1.1rem;font-weight:600;margin-bottom:1.2rem;">
+        ✦ Yarn cost is included unless premium yarn is requested &nbsp;|&nbsp; Delivery charge paid separately by the customer ✦
       </p>
       <a href="#contact" class="btn btn-primary">Place a Custom Order</a>
     </div>
@@ -847,7 +893,7 @@ footer a { color: var(--mint); text-decoration: none; }
 <section id="shop" style="padding:6rem 2rem;">
   <div class="shop-section">
     <div class="shop-intro reveal">
-      <span class="section-tag">✦ Ready-Made Shop</span>
+      <span class="section-tag" style="font-size:1.1rem;font-weight:700;font-style:normal;">✦ Ready-Made Shop</span>
       <h2 class="section-title">The <em>Collection</em></h2>
       <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mid);">
         One-of-a-kind pieces ready to go — each priced individually
@@ -897,8 +943,86 @@ footer a { color: var(--mint); text-decoration: none; }
   </div>
 </section>
 
+<!-- TERMS OF SERVICE -->
+<section id="tos" class="tos-section">
+  <div class="tos-inner">
+    <div class="tos-intro reveal">
+      <span class="section-tag">✦ Before You Order</span>
+      <h2 class="section-title">Terms of <em>Service</em></h2>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mid);">
+        Please take a moment to read through these before placing a custom order — thank you! ✦
+      </p>
+    </div>
+
+    <div class="tos-grid stagger">
+
+      <!-- Payment -->
+      <div class="tos-card">
+        <div class="tos-card-header">
+          <div class="tos-card-title">Method of Payment</div>
+        </div>
+        <ul>
+          <li>PayPal</li>
+          <li>Google Pay</li>
+        </ul>
+      </div>
+
+      <!-- Payment Policy -->
+      <div class="tos-card">
+        <div class="tos-card-header">
+          <div class="tos-card-title">Payment Policy</div>
+        </div>
+        <ul>
+          <li>Full payment must be made upfront before work begins</li>
+          <li>No refunds once I have started working on your order</li>
+          <li>Delivery charges are paid separately by the customer</li>
+        </ul>
+      </div>
+
+      <!-- TAT -->
+      <div class="tos-card">
+        <div class="tos-card-header">
+          <div class="tos-card-title">Turnaround Time</div>
+        </div>
+        <p>10–20 days depending on project complexity. I'll give you a more specific estimate when we finalise your order.</p>
+      </div>
+
+      <!-- Dos & Don'ts -->
+      <div class="tos-card tos-full">
+        <div class="tos-card-header">
+          <div class="tos-card-title">What I Make & What I Don't</div>
+        </div>
+        <div class="tos-dos-donts">
+          <div class="tos-dos">
+            <h4>✓ I will make</h4>
+            <ul>
+              <li>Amigurumis</li>
+              <li>Bags</li>
+              <li>Mini decorations</li>
+              <li>Mini bag charms</li>
+              <li>Keychains</li>
+              <li>Hair accessories</li>
+              <li>Bouquets</li>
+              <li>Other small crochet projects</li>
+            </ul>
+          </div>
+          <div class="tos-donts">
+            <h4>✕ I won't make</h4>
+            <ul>
+              <li>Dresses</li>
+              <li>Sweaters / cardigans</li>
+              <li>Extremely complex projects</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <footer>
-  <p>© 2025 Nick Crafts Heaven &nbsp;✦&nbsp; Handmade with care &nbsp;|&nbsp; <a href="index.html">← Back to Nick's World</a></p>
+  <p>© 2025 Nick Crafts Heaven &nbsp;✦&nbsp; Handmade with care &nbsp;|&nbsp; <a href="index.html">Back to Nick's World</a></p>
 </footer>
 <script src="firebase-data.js"></script>
 <script>
