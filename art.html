@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nick the Drawer ✦ Digital Art</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --pink:    #f7c5d5;
+  --blush:   #fde8ef;
+  --rose:    #e8829a;
+  --dusty:   #c4607a;
+  --deep:    #8b2252;
+  --mauve:   #b07090;
+  --lavender:#e8d5f0;
+  --lilac:   #c9a8e0;
+  --cream:   #fdf6f0;
+  --warm:    #f9ede8;
+  --gold:    #d4a96a;
+  --text:    #3d2b35;
+  --mid:     #7a5c68;
+  --light:   #b09090;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ===== CURSOR ===== */
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--dusty);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s;
+}
+.cursor-ring {
+  width: 32px; height: 32px;
+  border: 1.5px solid var(--rose);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.18s ease, width 0.3s, height 0.3s, border-color 0.3s;
+  opacity: 0.7;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 3rem;
+  background: rgba(253,246,240,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(231,160,185,0.25);
+  transition: padding 0.3s;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem; font-style: italic;
+  color: var(--deep);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+.nav-logo span { color: var(--rose); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.82rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--mid);
+  text-decoration: none; font-weight: 500;
+  position: relative; transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 1.5px; background: var(--rose);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.nav-links a:hover { color: var(--rose); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-back {
+  font-size: 0.78rem; letter-spacing: 0.08em;
+  color: var(--light); text-decoration: none;
+  text-transform: uppercase; transition: color 0.3s;
+}
+.nav-back:hover { color: var(--rose); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  padding-top: 80px;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: 
+    radial-gradient(ellipse 60% 50% at 20% 40%, rgba(247,197,213,0.45) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 80% 60%, rgba(232,198,240,0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 50% 80%, rgba(247,220,200,0.3) 0%, transparent 70%),
+    var(--cream);
+}
+.hero-deco {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; padding: 2rem;
+  animation: fade-up 1s ease both;
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1.05rem;
+  color: var(--rose); letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+  animation: fade-up 1s ease 0.2s both;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  font-weight: 700; line-height: 0.95;
+  color: var(--deep);
+  margin-bottom: 1.2rem;
+  animation: fade-up 1s ease 0.35s both;
+}
+.hero-title em { font-style: italic; color: var(--rose); }
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  color: var(--mid); font-style: italic;
+  margin-bottom: 2.5rem; letter-spacing: 0.05em;
+  animation: fade-up 1s ease 0.5s both;
+}
+.hero-cta {
+  display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+  animation: fade-up 1s ease 0.65s both;
+}
+.btn {
+  padding: 0.75rem 2rem; border-radius: 50px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.85rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  border: none; display: inline-block;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--rose), var(--dusty));
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(196,96,122,0.35);
+}
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 12px 32px rgba(196,96,122,0.45);
+}
+.btn-outline {
+  background: transparent; color: var(--dusty);
+  border: 2px solid var(--dusty);
+}
+.btn-outline:hover {
+  background: var(--dusty); color: #fff;
+  transform: translateY(-3px) scale(1.04);
+}
+
+/* Scroll indicator */
+.scroll-ind {
+  position: absolute; bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0.4rem; z-index: 2;
+  animation: fade-up 1s ease 1s both;
+}
+.scroll-ind span {
+  font-size: 0.7rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--light);
+}
+.scroll-line {
+  width: 1.5px; height: 40px;
+  background: linear-gradient(to bottom, var(--rose), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse {
+  0%,100% { transform: scaleY(1); opacity: 0.6; }
+  50% { transform: scaleY(1.3); opacity: 1; }
+}
+
+/* ===== SECTION BASE ===== */
+section { padding: 6rem 2rem; }
+.section-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 0.9rem;
+  color: var(--rose); letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 0.8rem;
+  display: block;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700; color: var(--deep);
+  line-height: 1.15; margin-bottom: 1.5rem;
+}
+.section-title em { font-style: italic; color: var(--rose); }
+
+/* ===== ABOUT ===== */
+.about {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem;
+  align-items: center;
+}
+.about-visual {
+  position: relative;
+}
+.about-frame {
+  width: 100%; aspect-ratio: 4/5;
+  background: linear-gradient(135deg, var(--blush), var(--lavender) 60%, var(--pink));
+  border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  animation: morph 8s ease-in-out infinite;
+  box-shadow: 0 20px 60px rgba(196,96,122,0.2);
+}
+@keyframes morph {
+  0%,100% { border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%; }
+  33% { border-radius: 40% 60% 45% 55% / 55% 50% 50% 45%; }
+  66% { border-radius: 50% 50% 40% 60% / 45% 55% 45% 55%; }
+}
+.about-frame-inner {
+  font-size: 5rem; text-align: center;
+  filter: drop-shadow(0 4px 16px rgba(196,96,122,0.3));
+}
+.about-float {
+  position: absolute; border-radius: 50%;
+  background: white; box-shadow: 0 4px 20px rgba(196,96,122,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  animation: float-bob 4s ease-in-out infinite;
+}
+@keyframes float-bob {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.about-float.f1 { width:60px;height:60px; top:-10px; right:5%;  animation-delay:0s; }
+.about-float.f2 { width:48px;height:48px; bottom:10%; left:-8%; animation-delay:1.2s; }
+.about-float.f3 { width:52px;height:52px; bottom:-5%; right:15%; animation-delay:2.4s; }
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.about-bio {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; line-height: 1.85;
+  color: var(--mid); margin-bottom: 1.5rem;
+}
+.about-tags {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.tag {
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem; font-weight: 500;
+  letter-spacing: 0.06em;
+  border: 1.5px solid var(--pink);
+  color: var(--dusty); background: var(--blush);
+  transition: all 0.3s;
+}
+.tag:hover { background: var(--rose); color: #fff; border-color: var(--rose); }
+
+/* ===== PRICING ===== */
+.pricing-section {
+  background: linear-gradient(135deg, #fdf0f5 0%, #f8eeff 50%, #fdf6f0 100%);
+  position: relative; overflow: hidden;
+}
+.pricing-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e8829a' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.pricing-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.pricing-intro {
+  text-align: center; margin-bottom: 4rem;
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.8rem;
+}
+.price-card {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  padding: 2.2rem 1.8rem;
+  border: 1.5px solid rgba(231,160,185,0.3);
+  position: relative; overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  cursor: default;
+}
+.price-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--pink), var(--rose), var(--lilac));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s;
+}
+.price-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(196,96,122,0.15);
+  border-color: rgba(231,160,185,0.6);
+}
+.price-card:hover::before { transform: scaleX(1); }
+.price-card.featured {
+  background: linear-gradient(135deg, rgba(196,96,122,0.08), rgba(201,168,224,0.12));
+  border-color: rgba(196,96,122,0.4);
+}
+.price-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.price-type {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem; font-weight: 700;
+  color: var(--deep); margin-bottom: 0.4rem;
+}
+.price-desc {
+  font-size: 0.85rem; color: var(--mid);
+  line-height: 1.6; margin-bottom: 1.5rem;
+}
+.price-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; font-weight: 700;
+  color: var(--dusty);
+}
+.price-amount span { font-size: 1rem; color: var(--light); font-family: 'Quicksand', sans-serif; }
+.price-features { margin-top: 1.2rem; list-style: none; }
+.price-features li {
+  font-size: 0.83rem; color: var(--mid);
+  padding: 0.3rem 0;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.price-features li::before { content: '✦'; font-size: 0.65rem; color: var(--rose); flex-shrink: 0; }
+.featured-badge {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  background: linear-gradient(135deg, var(--rose), var(--dusty));
+  color: #fff; font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.25rem 0.75rem; border-radius: 50px;
+}
+
+/* ===== GALLERY ===== */
+.gallery-section { max-width: 1300px; margin: 0 auto; }
+.gallery-intro { text-align: center; margin-bottom: 3rem; }
+.gallery-filters {
+  display: flex; gap: 0.75rem; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 3rem;
+}
+.filter-btn {
+  padding: 0.45rem 1.4rem; border-radius: 50px;
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.07em;
+  text-transform: uppercase; cursor: pointer;
+  border: 1.5px solid var(--pink);
+  background: transparent; color: var(--mauve);
+  transition: all 0.3s;
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--rose); color: #fff; border-color: var(--rose);
+}
+
+/* Masonry-style gallery */
+.gallery-grid {
+  columns: 4 220px; column-gap: 1.2rem;
+}
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 1.2rem;
+  position: relative; overflow: hidden;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 4px 20px rgba(139,34,82,0.1);
+}
+.gallery-item:hover { transform: scale(1.02); z-index: 2; }
+
+/* Picture frame */
+.gallery-frame {
+  position: relative;
+  background: white;
+  padding: 10px 10px 28px 10px;
+  border: 1.5px solid rgba(231,160,185,0.35);
+  box-shadow: 
+    0 1px 0 rgba(255,255,255,0.8) inset,
+    0 -1px 0 rgba(196,96,122,0.15) inset,
+    0 8px 30px rgba(139,34,82,0.12),
+    4px 4px 0 rgba(231,160,185,0.3),
+    5px 5px 0 rgba(231,160,185,0.15);
+}
+.gallery-img {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  /* Placeholder colored art blocks */
+}
+.gallery-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  text-align: center; padding: 4px 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem; color: var(--light);
+  font-style: italic;
+}
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(139,34,82,0.75) 0%, transparent 60%);
+  opacity: 0; border-radius: 16px;
+  transition: opacity 0.3s;
+  display: flex; align-items: flex-end; padding: 1.2rem;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.gallery-overlay-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; color: #fff; font-weight: 700;
+  display: block;
+}
+.gallery-overlay-cat {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 0.82rem;
+  color: var(--pink); display: block; margin-top: 0.15rem;
+}
+
+/* Art placeholder images using CSS */
+.art-block {
+  width: 100%; display: block;
+  border-radius: 6px; position: relative; overflow: hidden;
+}
+
+/* ===== CONTACTS ===== */
+.contact-section {
+  background: linear-gradient(135deg, var(--deep) 0%, #5c1a38 50%, #3d1228 100%);
+  position: relative; overflow: hidden;
+}
+.contact-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: 
+    radial-gradient(ellipse 50% 60% at 20% 50%, rgba(247,197,213,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 80% 40%, rgba(201,168,224,0.1) 0%, transparent 60%);
+}
+.contact-inner {
+  max-width: 900px; margin: 0 auto;
+  text-align: center; position: relative; z-index: 1;
+}
+.contact-inner .section-title { color: #fff; }
+.contact-inner .section-tag { color: var(--pink); }
+.contact-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1.15rem;
+  color: rgba(255,255,255,0.7); margin-bottom: 3rem;
+}
+.social-links {
+  display: flex; gap: 1.5rem; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 3rem;
+}
+.social-link {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 1rem 2rem; border-radius: 60px;
+  text-decoration: none; font-weight: 600;
+  font-size: 0.9rem; letter-spacing: 0.05em;
+  transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  color: #fff;
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(8px);
+}
+.social-link:hover {
+  transform: translateY(-5px) scale(1.05);
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.4);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+.social-icon {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+}
+.social-link.insta .social-icon { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.social-link.fb .social-icon { background: #1877f2; }
+.social-link.discord .social-icon { background: #5865f2; }
+
+.contact-note {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1rem;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ===== FLOATING DECORATIONS ===== */
+.floaters {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 50;
+  overflow: hidden;
+}
+.floater {
+  position: absolute;
+  opacity: 0;
+  animation: float-rise 12s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes float-rise {
+  0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  8%   { opacity: 0.55; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-10vh) rotate(270deg); opacity: 0; }
+}
+
+/* ===== DECORATIVE PAINTBRUSH DIVIDER ===== */
+.brush-divider {
+  text-align: center; padding: 1.5rem 0;
+  opacity: 0.35;
+}
+.brush-divider svg { width: 200px; height: 24px; }
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left {
+  opacity: 0; transform: translateX(-40px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right {
+  opacity: 0; transform: translateX(40px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* stagger children */
+.stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.stagger.visible > *:nth-child(1) { opacity:1;transform:translateY(0);transition-delay:0.05s; }
+.stagger.visible > *:nth-child(2) { opacity:1;transform:translateY(0);transition-delay:0.15s; }
+.stagger.visible > *:nth-child(3) { opacity:1;transform:translateY(0);transition-delay:0.25s; }
+.stagger.visible > *:nth-child(4) { opacity:1;transform:translateY(0);transition-delay:0.35s; }
+.stagger.visible > *:nth-child(5) { opacity:1;transform:translateY(0);transition-delay:0.45s; }
+
+/* ===== LIGHTBOX ===== */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(30,10,20,0.92);
+  backdrop-filter: blur(12px);
+  align-items: center; justify-content: center;
+  padding: 2rem;
+}
+.lightbox.open { display: flex; animation: lb-in 0.3s ease; }
+@keyframes lb-in { from { opacity:0; } to { opacity:1; } }
+.lightbox-inner {
+  max-width: 90vw; max-height: 90vh;
+  background: white; border-radius: 20px;
+  overflow: hidden; position: relative;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+.lightbox-close {
+  position: fixed; top: 1.5rem; right: 2rem;
+  font-size: 2rem; color: #fff; cursor: pointer;
+  transition: transform 0.3s;
+  background: none; border: none; line-height: 1;
+}
+.lightbox-close:hover { transform: rotate(90deg); }
+.lightbox-img { display: block; max-height: 80vh; max-width: 80vw; }
+.lightbox-meta {
+  padding: 1.2rem 1.8rem;
+  background: white;
+}
+.lightbox-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; color: var(--deep); font-weight: 700;
+}
+.lightbox-cat {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; color: var(--rose); font-size: 0.95rem;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center; padding: 2rem;
+  background: var(--deep); color: rgba(255,255,255,0.35);
+  font-size: 0.78rem; letter-spacing: 0.1em;
+}
+footer a { color: var(--pink); text-decoration: none; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .about { grid-template-columns: 1fr; gap: 3rem; }
+  .about-frame { max-width: 300px; margin: 0 auto; }
+  .gallery-grid { columns: 2 160px; }
+  section { padding: 4rem 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Floating art particles -->
+<div class="floaters" id="floaters"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">✕</button>
+  <div class="lightbox-inner">
+    <div id="lbContent"></div>
+    <div class="lightbox-meta">
+      <div class="lightbox-title" id="lbTitle"></div>
+      <div class="lightbox-cat" id="lbCat"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html"><span data-nick="name">Nick</span> <span>✦</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-back" href="index.html">← All of Nick</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+
+  <!-- Decorative SVG art elements -->
+  <div class="hero-deco">
+    <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- Watercolor blobs -->
+      <ellipse cx="120" cy="200" rx="90" ry="70" fill="rgba(247,197,213,0.35)" />
+      <ellipse cx="1300" cy="150" rx="110" ry="80" fill="rgba(201,168,224,0.3)" />
+      <ellipse cx="200" cy="700" rx="80" ry="60" fill="rgba(232,198,240,0.25)" />
+      <ellipse cx="1200" cy="680" rx="100" ry="70" fill="rgba(247,197,213,0.3)" />
+      <!-- Paint stroke -->
+      <path d="M0 400 Q200 350 400 420 Q600 490 800 400 Q1000 310 1200 380 Q1350 430 1400 400" stroke="rgba(232,130,154,0.12)" stroke-width="60" fill="none" stroke-linecap="round"/>
+      <!-- Small deco stars -->
+      <text x="80" y="80" font-size="28" fill="rgba(196,96,122,0.25)">✦</text>
+      <text x="1330" y="300" font-size="20" fill="rgba(196,96,122,0.2)">✧</text>
+      <text x="700" y="60" font-size="16" fill="rgba(196,96,122,0.18)">★</text>
+      <text x="50" y="600" font-size="22" fill="rgba(201,168,224,0.3)">✿</text>
+      <text x="1350" y="650" font-size="18" fill="rgba(201,168,224,0.25)">❀</text>
+      <!-- Brush stroke deco -->
+      <path d="M50 700 Q300 660 500 700" stroke="rgba(196,96,122,0.18)" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <path d="M900 100 Q1100 70 1300 100" stroke="rgba(201,168,224,0.22)" stroke-width="10" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">✦ Digital Art & Illustrations ✦</p>
+    <h1 class="hero-title"><span data-nick="name">Nick the</span><br><em>Drawer</em></h1>
+    <p class="hero-sub">Where imagination blooms into digital beauty —<br>every pixel painted with heart</p>
+    <div class="hero-cta">
+      <a href="#gallery" class="btn btn-primary">View Gallery</a>
+      <a href="#pricing" class="btn btn-outline">Commission Art</a>
+    </div>
+  </div>
+
+  <div class="scroll-ind">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="padding: 6rem 2rem;">
+  <div class="about">
+    <div class="about-visual reveal-left">
+      <div class="about-frame">
+        <img data-nick="avatar" src="" alt="Nick's avatar"
+             style="width:100%;height:100%;object-fit:cover;display:none;border-radius:inherit;"
+             onload="this.style.display='block';this.nextElementSibling.style.display='none';">
+        <div class="about-frame-inner">
+          <svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+            <!-- Stylized artist avatar -->
+            <circle cx="90" cy="70" r="45" fill="#fde8ef" stroke="#e8829a" stroke-width="2"/>
+            <circle cx="90" cy="65" r="28" fill="#f7c5d5"/>
+            <!-- Face -->
+            <circle cx="80" cy="60" r="4" fill="#c4607a"/>
+            <circle cx="100" cy="60" r="4" fill="#c4607a"/>
+            <path d="M82 72 Q90 80 98 72" stroke="#c4607a" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- Hair -->
+            <path d="M62 55 Q65 30 90 28 Q115 30 118 55" fill="#8b2252"/>
+            <path d="M60 58 Q55 50 58 42 Q70 25 90 24 Q110 25 122 42 Q125 50 120 58" fill="#8b2252"/>
+            <!-- Body with artist smock -->
+            <path d="M55 115 Q55 95 75 90 Q90 87 90 87 Q90 87 105 90 Q125 95 125 115 L125 130 L55 130 Z" fill="#c4607a"/>
+            <!-- Paintbrush in hand -->
+            <rect x="120" y="80" width="5" height="40" rx="2.5" fill="#d4a96a" transform="rotate(30,120,80)"/>
+            <ellipse cx="132" cy="108" rx="4" ry="6" fill="#e8829a" transform="rotate(30,132,108)"/>
+            <!-- Paint splatter around -->
+            <circle cx="30" cy="40" r="6" fill="rgba(232,130,154,0.5)"/>
+            <circle cx="150" cy="50" r="5" fill="rgba(201,168,224,0.6)"/>
+            <circle cx="20" cy="130" r="4" fill="rgba(196,96,122,0.4)"/>
+            <circle cx="160" cy="120" r="7" fill="rgba(247,197,213,0.6)"/>
+            <!-- Stars -->
+            <text x="15" y="75" font-size="14" fill="rgba(196,96,122,0.5)">✦</text>
+            <text x="152" y="85" font-size="12" fill="rgba(201,168,224,0.6)">✧</text>
+          </svg>
+        </div>
+      </div>
+      <div class="about-float f1">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="4" fill="#e8829a" opacity="0.85"/>
+          <circle cx="11" cy="4"  r="2" fill="#e8829a" opacity="0.5"/>
+          <circle cx="11" cy="18" r="2" fill="#e8829a" opacity="0.5"/>
+          <circle cx="4"  cy="11" r="2" fill="#e8829a" opacity="0.5"/>
+          <circle cx="18" cy="11" r="2" fill="#e8829a" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="about-float f2">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 2 L11.8 7.6 H17.6 L12.9 11 L14.7 16.6 L10 13.2 L5.3 16.6 L7.1 11 L2.4 7.6 H8.2 Z" fill="#c4607a" opacity="0.7"/>
+        </svg>
+      </div>
+      <div class="about-float f3">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="10" r="8" stroke="#e8829a" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="10" cy="10" r="3" fill="#e8829a" opacity="0.6"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="about-text reveal-right">
+      <span class="section-tag">✦ About the Artist</span>
+      <h2 class="section-title" data-nick="about-heading">Hello, I'm <em>Nick!</em></h2>
+      <p class="about-bio" data-nick="about-bio1">
+        I'm a digital artist with a passion for soft, dreamy illustrations that tell stories through colour and light. My art lives in the space between fantasy and emotion — characters with big feelings, florals that breathe, and worlds you'd want to step into.
+      </p>
+      <p class="about-bio" data-nick="about-bio2">
+        Every piece I create is made with love, care, and way too many reference tabs open. Whether it's a portrait, a scene, or something entirely surreal — I pour my whole heart into it.
+      </p>
+      <div class="about-tags" data-nick="about-tags">
+        <span class="tag">Character Design</span>
+        <span class="tag">Portraits</span>
+        <span class="tag">Fanart</span>
+        <span class="tag">OC Art</span>
+        <span class="tag">Chibi</span>
+        <span class="tag">Scenery</span>
+        <span class="tag">Illustration</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Brush divider -->
+<div class="brush-divider">
+  <svg viewBox="0 0 400 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 12 Q50 4 100 12 Q150 20 200 12 Q250 4 300 12 Q350 20 400 12" stroke="#e8829a" stroke-width="2" fill="none"/>
+    <text x="195" y="16" font-size="14" fill="#e8829a" text-anchor="middle">✦</text>
+  </svg>
+</div>
+
+<!-- PRICING -->
+<section id="pricing" class="pricing-section">
+  <div class="pricing-inner">
+    <div class="pricing-intro reveal">
+      <span class="section-tag">✦ Commission Pricing</span>
+      <h2 class="section-title">Bring Your <em>Vision</em> to Life</h2>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mid);max-width:500px;margin:0 auto;">
+        Each piece is crafted with intention and love. Prices reflect hours of detail work — you're getting something truly one-of-a-kind.
+      </p>
+    </div>
+
+    <div class="pricing-grid stagger" data-nick="pricingGrid">
+      <div class="price-card">
+        <div class="price-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M8 24 L16 6 L24 24" stroke="#c4607a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="10.5" y1="18" x2="21.5" y2="18" stroke="#c4607a" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="price-type">Sketch</div>
+        <div class="price-desc">Clean lineart, no colour. Perfect for quick character references or simple portraits.</div>
+        <div class="price-amount">$15 <span>/ character</span></div>
+        <ul class="price-features">
+          <li>1 character</li>
+          <li>Clean lineart</li>
+          <li>1 revision</li>
+          <li>PNG delivery</li>
+        </ul>
+      </div>
+
+      <div class="price-card featured">
+        <div class="featured-badge">Popular</div>
+        <div class="price-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="9" stroke="#c4607a" stroke-width="1.8"/><circle cx="12" cy="13" r="2" fill="#e8829a"/><circle cx="20" cy="13" r="2" fill="#c4607a"/><circle cx="16" cy="20" r="2" fill="#f7c5d5"/></svg>
+        </div>
+        <div class="price-type">Full Colour</div>
+        <div class="price-desc">Fully rendered with cel shading or soft shading, detailed background optional.</div>
+        <div class="price-amount">$45 <span>/ character</span></div>
+        <ul class="price-features">
+          <li>1 character</li>
+          <li>Full shading & colour</li>
+          <li>Simple background incl.</li>
+          <li>3 revisions</li>
+          <li>High-res PNG + PSD</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="price-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="4" fill="#e8829a"/><ellipse cx="16" cy="8"  rx="3" ry="5" fill="#f7c5d5" opacity="0.8"/><ellipse cx="16" cy="24" rx="3" ry="5" fill="#f7c5d5" opacity="0.8"/><ellipse cx="8"  cy="16" rx="5" ry="3" fill="#f7c5d5" opacity="0.8"/><ellipse cx="24" cy="16" rx="5" ry="3" fill="#f7c5d5" opacity="0.8"/></svg>
+        </div>
+        <div class="price-type">Chibi / Icon</div>
+        <div class="price-desc">Super cute mini versions of your character — perfect for profile pictures & stickers.</div>
+        <div class="price-amount">$25 <span>/ character</span></div>
+        <ul class="price-features">
+          <li>Chibi style</li>
+          <li>Flat or soft shading</li>
+          <li>Transparent background</li>
+          <li>2 revisions</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="price-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="5" y="5" width="22" height="22" rx="3" stroke="#c4607a" stroke-width="1.8"/><rect x="9" y="9" width="14" height="14" rx="2" stroke="#e8829a" stroke-width="1.2" stroke-dasharray="3 2"/></svg>
+        </div>
+        <div class="price-type">Scene / Scene</div>
+        <div class="price-desc">Full illustrated scene with background, atmosphere, lighting — cinematic and detailed.</div>
+        <div class="price-amount">$90 <span>/ scene</span></div>
+        <ul class="price-features">
+          <li>Up to 2 characters</li>
+          <li>Full scene background</li>
+          <li>Detailed rendering</li>
+          <li>Unlimited revisions</li>
+          <li>Commercial rights available</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="price-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="9" width="24" height="16" rx="3" stroke="#c4607a" stroke-width="1.8"/><path d="M4 11 L16 19 L28 11" stroke="#c4607a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="price-type">Custom Quote</div>
+        <div class="price-desc">Something unique in mind? Reference sheets, comic panels, merch design — let's talk!</div>
+        <div class="price-amount">DM <span>for details</span></div>
+        <ul class="price-features">
+          <li>Reference sheets</li>
+          <li>Comic panels</li>
+          <li>Merch design</li>
+          <li>Sticker packs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:3rem;" class="reveal">
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--mid);font-size:0.95rem;margin-bottom:1.2rem;">
+        ✦ Additional characters +50% of base price &nbsp;|&nbsp; Rushed commissions (under 48h) +30% &nbsp;✦
+      </p>
+      <a href="#contact" class="btn btn-primary">Commission Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- Brush divider -->
+<div class="brush-divider">
+  <svg viewBox="0 0 400 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 12 Q50 20 100 12 Q150 4 200 12 Q250 20 300 12 Q350 4 400 12" stroke="#c9a8e0" stroke-width="2" fill="none"/>
+    <text x="195" y="16" font-size="14" fill="#c9a8e0" text-anchor="middle">✧</text>
+  </svg>
+</div>
+
+<!-- GALLERY -->
+<section id="gallery" style="padding:6rem 2rem;">
+  <div class="gallery-section">
+    <div class="gallery-intro reveal">
+      <span class="section-tag">✦ Portfolio</span>
+      <h2 class="section-title">The <em>Gallery</em></h2>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mid);">
+        A collection of dreams painted in pixels
+      </p>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Gallery items - art placeholders with rich CSS illustrations -->
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--mid);font-size:0.95rem;margin-bottom:1.2rem;">
+        ✦ Upload your own art via the Admin Panel ✦
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <span class="section-tag">✦ Let's Connect</span>
+    <h2 class="section-title">Find Nick</h2>
+    <p class="contact-sub">Drop a message, commission request, or just say hi —<br>every message is read with care</p>
+
+    <div class="social-links reveal stagger">
+      <a href="#" class="social-link insta" data-nick="insta-url">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="12" rx="3" stroke="white" stroke-width="1.5"/><circle cx="10" cy="11" r="3" stroke="white" stroke-width="1.4"/><path d="M7 5 L8.5 3 H11.5 L13 5" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Instagram</div>
+          <div>@nick.draws</div>
+        </div>
+      </a>
+      <a href="#" class="social-link fb" data-nick="fb-url">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M11 17V11h2.5l0.5-3H11V6.5C11 5.7 11.3 5 12.5 5H14V2.3C13.5 2.2 12.6 2 11.5 2C9.1 2 7.5 3.5 7.5 6.2V8H5v3h2.5v6H11Z" fill="white"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Facebook</div>
+          <div>Nick the Drawer</div>
+        </div>
+      </a>
+      <a href="#" class="social-link discord">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 3C5 3.5 3 5.5 2.5 8L2 13c0 1 1 1.5 1.8 1L5 13h10l1.2 1c.8.5 1.8 0 1.8-1L17.5 8C17 5.5 15 3.5 12.5 3L12 5H8L7.5 3Z" stroke="white" stroke-width="1.4" stroke-linejoin="round"/><circle cx="7.5" cy="10" r="1" fill="white"/><circle cx="12.5" cy="10" r="1" fill="white"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Discord</div>
+          <div data-nick="discord">nick.draws#0001</div>
+        </div>
+      </a>
+    </div>
+
+    <p class="contact-note" data-nick="contact-note">Response time: usually within 24–48 hours ✦ DMs open for commissions</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Nick the Drawer &nbsp;✦&nbsp; Made with care &nbsp;|&nbsp; <a href="index.html">← Back to Nick's World</a></p>
+</footer>
+<script src="firebase-data.js"></script>
+<script>
+// ===== GALLERY DATA (placeholder art pieces, will come from admin in real build) =====
+const artworks = [
+  { id:1, title:"Sakura Dreams", cat:"character", catLabel:"Character Design", h:280,
+    colors:["#fde8ef","#f7c5d5","#e8829a","#c4607a","#fdf6f0"],
+    shapes:"flower" },
+  { id:2, title:"Moonlit Portrait", cat:"portrait", catLabel:"Portrait", h:340,
+    colors:["#3d2b35","#8b2252","#c4607a","#f7c5d5","#fde8ef"],
+    shapes:"portrait" },
+  { id:3, title:"Tiny Adventurer", cat:"chibi", catLabel:"Chibi", h:220,
+    colors:["#fde8ef","#c9a8e0","#e8829a","#f7c5d5","#fff"],
+    shapes:"chibi" },
+  { id:4, title:"Enchanted Forest", cat:"scene", catLabel:"Scene", h:320,
+    colors:["#1a3a1a","#2d6e2d","#8b2252","#f7c5d5","#c9a8e0"],
+    shapes:"scene" },
+  { id:5, title:"Rose Princess", cat:"character", catLabel:"Character Design", h:300,
+    colors:["#f7c5d5","#e8829a","#c4607a","#fde8ef","#c9a8e0"],
+    shapes:"princess" },
+  { id:6, title:"Soft Study", cat:"portrait", catLabel:"Portrait", h:250,
+    colors:["#fdf6f0","#f7c5d5","#d4a96a","#c4607a","#fde8ef"],
+    shapes:"study" },
+  { id:7, title:"Star Witch", cat:"character", catLabel:"Character Design", h:360,
+    colors:["#1a1040","#3d2b6e","#c9a8e0","#f7c5d5","#ffe86e"],
+    shapes:"witch" },
+  { id:8, title:"Pudding Friend", cat:"chibi", catLabel:"Chibi", h:200,
+    colors:["#fde8ef","#f7c5d5","#e8829a","#fff","#d4a96a"],
+    shapes:"chibi2" },
+  { id:9, title:"Sunset Garden", cat:"scene", catLabel:"Scene", h:280,
+    colors:["#ff8c42","#ffd166","#e8829a","#c4607a","#3d2b35"],
+    shapes:"garden" },
+];
+
+function makeSVGArt(art) {
+  const w = 200, h = art.h;
+  const [c1,c2,c3,c4,c5] = art.colors;
+  let inner = '';
+
+  if (art.shapes === 'flower') {
+    inner = `
+      <rect width="${w}" height="${h}" fill="${c1}"/>
+      <circle cx="${w/2}" cy="${h*0.4}" r="${h*0.22}" fill="${c2}"/>
+      ${[0,60,120,180,240,300].map(a => `<ellipse cx="${w/2+Math.cos(a*Math.PI/180)*h*0.18}" cy="${h*0.4+Math.sin(a*Math.PI/180)*h*0.18}" rx="${h*0.1}" ry="${h*0.07}" fill="${c3}" opacity="0.8" transform="rotate(${a},${w/2+Math.cos(a*Math.PI/180)*h*0.18},${h*0.4+Math.sin(a*Math.PI/180)*h*0.18})"/>`).join('')}
+      <circle cx="${w/2}" cy="${h*0.4}" r="${h*0.1}" fill="${c4}"/>
+      <path d="M${w/2} ${h*0.62} Q${w/2+20} ${h*0.75} ${w/2} ${h*0.88} Q${w/2-20} ${h*0.75} ${w/2} ${h*0.62}" fill="${c3}" opacity="0.6"/>
+      <text x="${w/2}" y="${h*0.92}" text-anchor="middle" font-size="10" fill="${c4}" font-family="serif" font-style="italic" opacity="0.7">✦ ${art.title} ✦</text>
+    `;
+  } else if (art.shapes === 'portrait') {
+    inner = `
+      <rect width="${w}" height="${h}" fill="${c1}"/>
+      <ellipse cx="${w/2}" cy="${h*0.55}" rx="${w*0.38}" ry="${h*0.32}" fill="${c2}" opacity="0.6"/>
+      <circle cx="${w/2}" cy="${h*0.35}" r="${h*0.18}" fill="${c3}"/>
+      <circle cx="${w/2}" cy="${h*0.33}" r="${h*0.13}" fill="${c4}"/>
+      <ellipse cx="${w*0.42}" cy="${h*0.31}" rx="4" ry="3" fill="${c5}"/>
+      <ellipse cx="${w*0.58}" cy="${h*0.31}" rx="4" ry="3" fill="${c5}"/>
+      <path d="M${w/2-8} ${h*0.38} Q${w/2} ${h*0.42} ${w/2+8} ${h*0.38}" stroke="${c5}" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M${w*0.28} ${h*0.22} Q${w/2} ${h*0.15} ${w*0.72} ${h*0.22}" fill="${c2}" opacity="0.8"/>
+      <ellipse cx="${w/2}" cy="${h*0.6}" rx="${w*0.3}" ry="${h*0.15}" fill="${c3}" opacity="0.7"/>
+      <text x="${w/2}" y="${h*0.92}" text-anchor="middle" font-size="9" fill="${c4}" font-family="serif" font-style="italic" opacity="0.7">✦</text>
+    `;
+  } else if (art.shapes === 'chibi' || art.shapes === 'chibi2') {
+    inner = `
+      <rect width="${w}" height="${h}" fill="${c1}"/>
+      <circle cx="${w/2}" cy="${h*0.35}" r="${h*0.22}" fill="${c2}"/>
+      <circle cx="${w/2}" cy="${h*0.33}" r="${h*0.15}" fill="${c3}" opacity="0.6"/>
+      <ellipse cx="${w*0.44}" cy="${h*0.32}" rx="3" ry="4" fill="${c4}"/>
+      <ellipse cx="${w*0.56}" cy="${h*0.32}" rx="3" ry="4" fill="${c4}"/>
+      <path d="M${w/2-5} ${h*0.38} Q${w/2} ${h*0.41} ${w/2+5} ${h*0.38}" stroke="${c4}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <rect x="${w*0.32}" y="${h*0.55}" width="${w*0.36}" height="${h*0.25}" rx="${h*0.05}" fill="${c4}"/>
+      <rect x="${w*0.22}" y="${h*0.56}" width="${w*0.1}" height="${h*0.18}" rx="${h*0.04}" fill="${c4}" opacity="0.8"/>
+      <rect x="${w*0.68}" y="${h*0.56}" width="${w*0.1}" height="${h*0.18}" rx="${h*0.04}" fill="${c4}" opacity="0.8"/>
+      <text x="${w/2}" y="${h*0.94}" text-anchor="middle" font-size="16" fill="${c3}">✦</text>
+    `;
+  } else if (art.shapes === 'scene') {
+    inner = `
+      <rect width="${w}" height="${h}" fill="${c1}"/>
+      <rect x="0" y="${h*0.5}" width="${w}" height="${h*0.5}" fill="${c2}" opacity="0.8"/>
+      <circle cx="${w*0.75}" cy="${h*0.2}" r="${h*0.12}" fill="${c4}" opacity="0.9"/>
+      ${[...Array(6)].map((_,i)=>`<rect x="${w*0.05+i*w*0.16}" y="${h*0.35}" width="${w*0.08}" height="${h*0.4}" rx="4" fill="${i%2===0?c2:c3}" opacity="0.9"/>`).join('')}
+      <ellipse cx="${w*0.2}" cy="${h*0.32}" rx="${w*0.15}" ry="${h*0.1}" fill="${c2}" opacity="0.5"/>
+      <ellipse cx="${w*0.8}" cy="${h*0.28}" rx="${w*0.12}" ry="${h*0.08}" fill="${c2}" opacity="0.4"/>
+      <text x="${w/2}" y="${h*0.93}" text-anchor="middle" font-size="10" fill="${c4}" font-family="serif" font-style="italic" opacity="0.8">✦</text>
+    `;
+  } else if (art.shapes === 'witch') {
+    inner = `
+      <rect width="${w}" height="${h}" fill="${c1}"/>
+      ${[...Array(20)].map((_,i)=>`<circle cx="${Math.random()*w}" cy="${Math.random()*h}" r="${Math.random()*3+1}" fill="${i%2===0?c3:c4}" opacity="${Math.random()*0.6+0.2}"/>`).join('')}
+      <circle cx="${w/2}" cy="${h*0.38}" r="${h*0.16}" fill="${c3}" opacity="0.7"/>
+      <circle cx="${w/2}" cy="${h*0.36}" r="${h*0.11}" fill="${c4}"/>
+      <polygon points="${w/2},${h*0.1} ${w*0.28},${h*0.28} ${w*0.72},${h*0.28}" fill="${c2}"/>
+      <ellipse cx="${w/2}" cy="${h*0.28}" rx="${w*0.25}" ry="${h*0.05}" fill="${c2}" opacity="0.6"/>
+      <ellipse cx="${w*0.42}" cy="${h*0.35}" rx="4" ry="3" fill="${c5}" opacity="0.9"/>
+      <ellipse cx="${w*0.58}" cy="${h*0.35}" rx="4" ry="3" fill="${c5}" opacity="0.9"/>
+      <path d="M${w/2-7} ${h*0.42} Q${w/2} ${h*0.46} ${w/2+7} ${h*0.42}" stroke="${c5}" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <text x="${w/2}" y="${h*0.93}" text-anchor="middle" font-size="10" fill="${c3}" font-family="serif" opacity="0.8">✦ Star Witch ✦</text>
+    `;
+  } else {
+    inner = `
+      <rect width="${w}" height="${h}" fill="${c1}"/>
+      <ellipse cx="${w/2}" cy="${h*0.45}" rx="${w*0.35}" ry="${h*0.3}" fill="${c2}" opacity="0.7"/>
+      <circle cx="${w/2}" cy="${h*0.35}" r="${h*0.14}" fill="${c3}"/>
+      <path d="M${w*0.3} ${h*0.65} Q${w/2} ${h*0.75} ${w*0.7} ${h*0.65}" stroke="${c4}" stroke-width="3" fill="none" opacity="0.6"/>
+      <text x="${w/2}" y="${h*0.93}" text-anchor="middle" font-size="10" fill="${c4}" font-family="serif" font-style="italic" opacity="0.7">✦</text>
+    `;
+  }
+
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
+}
+
+// Build gallery
+const grid = document.getElementById('galleryGrid');
+artworks.forEach(art => {
+  const item = document.createElement('div');
+  item.className = 'gallery-item';
+  item.dataset.cat = art.cat;
+  item.innerHTML = `
+    <div class="gallery-frame">
+      <div class="gallery-img">${makeSVGArt(art)}</div>
+      <div class="gallery-caption">${art.title}</div>
+    </div>
+    <div class="gallery-overlay">
+      <div class="gallery-overlay-content">
+        <span class="gallery-overlay-title">${art.title}</span>
+        <span class="gallery-overlay-cat">${art.catLabel}</span>
+      </div>
+    </div>
+  `;
+  item.addEventListener('click', () => openLightbox(art));
+  grid.appendChild(item);
+});
+
+// Lightbox
+function openLightbox(art) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lbContent').innerHTML = makeSVGArt({...art, h: Math.min(art.h * 1.5, 500)});
+  document.getElementById('lbTitle').textContent = art.title;
+  document.getElementById('lbCat').textContent = art.catLabel;
+  lb.classList.add('open');
+}
+document.getElementById('lbClose').addEventListener('click', () => {
+  document.getElementById('lightbox').classList.remove('open');
+});
+document.getElementById('lightbox').addEventListener('click', e => {
+  if (e.target === document.getElementById('lightbox'))
+    document.getElementById('lightbox').classList.remove('open');
+});
+
+// ===== CURSOR =====
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() {
+  rx += (mx - rx) * 0.14;
+  ry += (my - ry) * 0.14;
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+document.querySelectorAll('a,button,.gallery-item,.price-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    ring.style.width = '50px'; ring.style.height = '50px';
+    ring.style.borderColor = '#8b2252';
+  });
+  el.addEventListener('mouseleave', () => {
+    ring.style.width = '32px'; ring.style.height = '32px';
+    ring.style.borderColor = 'var(--rose)';
+  });
+});
+
+// ===== FLOATING PARTICLES =====
+const floatersEl = document.getElementById('floaters');
+const symbols = ['✦','✧','◇','✿','❀','★','◦','·'];
+for (let i = 0; i < 25; i++) {
+  const el = document.createElement('div');
+  el.className = 'floater';
+  el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+  el.style.left = Math.random() * 100 + '%';
+  el.style.fontSize = (Math.random() * 16 + 8) + 'px';
+  el.style.color = `hsl(${320 + Math.random()*60},${Math.floor(Math.random()*30+50)}%,${Math.floor(Math.random()*20+60)}%)`;
+  el.style.animationDuration = (Math.random() * 12 + 8) + 's';
+  el.style.animationDelay = (Math.random() * 15) + 's';
+  floatersEl.appendChild(el);
+}
+
+// ===== SCROLL REVEAL =====
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.stagger').forEach(el => observer.observe(el));
+
+// ===== NAV scroll effect =====
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  nav.style.padding = window.scrollY > 60 ? '0.6rem 3rem' : '1rem 3rem';
+});
+</script>
+</body>
+</html>

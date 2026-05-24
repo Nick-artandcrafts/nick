@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nick's World</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --pink: #f7c5d5;
+    --blush: #fde8ef;
+    --rose: #e8829a;
+    --dusty: #c4607a;
+    --sage: #b8d4c8;
+    --mint: #d9efe8;
+    --teal: #5a9e8a;
+    --cream: #fdf6f0;
+    --warm: #f4e9d8;
+    --gold: #d4a96a;
+    --text-dark: #3d2b35;
+    --text-mid: #7a5c68;
+  }
+
+  html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  body {
+    display: flex;
+    background: var(--cream);
+    position: relative;
+  }
+
+  /* Floating decorative elements */
+  .deco {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* === LEFT PANEL - ART === */
+  .panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: flex 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+  }
+
+  .panel-art {
+    background: linear-gradient(135deg, #fde8ef 0%, #f7c5d5 40%, #f0a0be 100%);
+  }
+  .panel-crochet {
+    background: linear-gradient(135deg, #d9efe8 0%, #b8d4c8 40%, #8ec4b0 100%);
+  }
+
+  .panel:hover { flex: 1.6; }
+  .panel:hover .panel-content { transform: scale(1.03); }
+
+  .panel-bg-art, .panel-bg-crochet {
+    position: absolute; inset: 0;
+    opacity: 0.18;
+    transition: opacity 0.5s;
+  }
+  .panel:hover .panel-bg-art,
+  .panel:hover .panel-bg-crochet { opacity: 0.32; }
+
+  /* Art decorative SVG background */
+  .art-bg-svg, .crochet-bg-svg {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+
+  .panel-content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 1.5rem;
+    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    padding: 2rem;
+  }
+
+  .panel-icon {
+    width: 110px; height: 110px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    position: relative;
+  }
+  .panel-art .panel-icon { background: rgba(255,255,255,0.45); }
+  .panel-crochet .panel-icon { background: rgba(255,255,255,0.45); }
+
+  .panel-icon svg {
+    width: 68px; height: 68px;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
+  }
+  .panel:hover .panel-icon svg { transform: scale(1.18) rotate(-6deg); }
+
+  .panel-label {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    text-align: center;
+    transition: letter-spacing 0.4s;
+  }
+  .panel-art .panel-label { color: #8b2252; }
+  .panel-crochet .panel-label { color: #1e5c4a; }
+  .panel:hover .panel-label { letter-spacing: 0.06em; }
+
+  .panel-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+    opacity: 0.75;
+    text-align: center;
+  }
+  .panel-art .panel-sub { color: #a03060; }
+  .panel-crochet .panel-sub { color: #2a7a60; }
+
+  .panel-btn {
+    margin-top: 0.5rem;
+    padding: 0.65rem 2rem;
+    border-radius: 50px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 2px solid;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  .panel:hover .panel-btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .panel-art .panel-btn {
+    color: #8b2252; border-color: #c4607a;
+  }
+  .panel-art .panel-btn:hover {
+    background: #c4607a; color: #fff;
+  }
+  .panel-crochet .panel-btn {
+    color: #1e5c4a; border-color: #5a9e8a;
+  }
+  .panel-crochet .panel-btn:hover {
+    background: #5a9e8a; color: #fff;
+  }
+
+  /* Divider */
+  .divider {
+    position: fixed;
+    left: 50%; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.8) 20%, rgba(255,255,255,0.8) 80%, transparent);
+    z-index: 10;
+    transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  /* Center ornament */
+  .center-ornament {
+    position: fixed;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    pointer-events: none;
+    transition: all 0.5s;
+  }
+  .center-ornament svg { filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15)); }
+
+  /* Floating petals / sparkles */
+  .floaters {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1;
+    overflow: hidden;
+  }
+  .floater {
+    position: absolute;
+    opacity: 0;
+    animation: float-up 8s ease-in-out infinite;
+  }
+  @keyframes float-up {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Tagline at top */
+  .tagline {
+    position: fixed; top: 0; left: 0; right: 0;
+    text-align: center;
+    padding: 1.1rem;
+    z-index: 20;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: rgba(61,43,53,0.55);
+    letter-spacing: 0.12em;
+    pointer-events: none;
+  }
+
+  /* Hover shimmer overlay */
+  .panel::after {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+  }
+  .panel-art::after {
+    background: radial-gradient(ellipse at center, rgba(247,197,213,0.35) 0%, transparent 70%);
+  }
+  .panel-crochet::after {
+    background: radial-gradient(ellipse at center, rgba(184,212,200,0.35) 0%, transparent 70%);
+  }
+  .panel:hover::after { opacity: 1; }
+
+  /* Animated circles in background */
+  .bg-circles {
+    position: absolute; inset: 0;
+    overflow: hidden; pointer-events: none;
+  }
+  .bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    animation: pulse-circle 6s ease-in-out infinite;
+  }
+  @keyframes pulse-circle {
+    0%, 100% { transform: scale(1); opacity: 0.12; }
+    50% { transform: scale(1.15); opacity: 0.22; }
+  }
+
+  /* Sparkle elements */
+  .sparkle {
+    position: absolute;
+    animation: sparkle-spin 4s linear infinite;
+  }
+  @keyframes sparkle-spin {
+    from { transform: rotate(0deg) scale(1); opacity: 0.6; }
+    50% { transform: rotate(180deg) scale(1.3); opacity: 1; }
+    to { transform: rotate(360deg) scale(1); opacity: 0.6; }
+  }
+</style>
+</head>
+<body>
+
+<div class="tagline">✦ Welcome to Nick's Creative World ✦</div>
+
+<!-- Floating petals -->
+<div class="floaters" id="floaters"></div>
+
+<!-- Left Panel: Art -->
+<a class="panel panel-art" href="art.html">
+  <div class="bg-circles">
+    <div class="bg-circle" style="width:320px;height:320px;background:#f7a8c4;top:-80px;left:-80px;animation-delay:0s"></div>
+    <div class="bg-circle" style="width:200px;height:200px;background:#e8829a;bottom:60px;right:20px;animation-delay:2s"></div>
+    <div class="bg-circle" style="width:150px;height:150px;background:#fde0ea;top:50%;left:60%;animation-delay:4s"></div>
+  </div>
+
+  <!-- Art decorative SVG -->
+  <div class="panel-bg-art">
+    <svg viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" class="art-bg-svg" preserveAspectRatio="xMidYMid slice">
+      <!-- Paintbrush strokes -->
+      <path d="M20 100 Q120 60 200 130 Q280 200 360 150" stroke="#c4607a" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.5"/>
+      <path d="M0 300 Q100 260 180 320 Q260 380 380 340" stroke="#e8829a" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.4"/>
+      <path d="M30 500 Q140 450 220 520 Q300 590 390 540" stroke="#f7c5d5" stroke-width="22" fill="none" stroke-linecap="round" opacity="0.5"/>
+      <path d="M10 700 Q110 650 200 710 Q290 770 380 720" stroke="#d4607a" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.35"/>
+      <!-- Paint splatters -->
+      <circle cx="80" cy="200" r="12" fill="#e8829a" opacity="0.5"/>
+      <circle cx="100" cy="210" r="6" fill="#f7c5d5" opacity="0.6"/>
+      <circle cx="70" cy="195" r="4" fill="#c4607a" opacity="0.5"/>
+      <circle cx="300" cy="450" r="14" fill="#d4607a" opacity="0.4"/>
+      <circle cx="320" cy="465" r="7" fill="#fde8ef" opacity="0.5"/>
+      <circle cx="290" cy="440" r="5" fill="#f7a8c4" opacity="0.5"/>
+      <!-- Palette shape -->
+      <ellipse cx="320" cy="120" rx="50" ry="35" fill="#fde8ef" opacity="0.6"/>
+      <circle cx="305" cy="110" r="8" fill="#e8829a" opacity="0.7"/>
+      <circle cx="325" cy="105" r="7" fill="#c4607a" opacity="0.7"/>
+      <circle cx="340" cy="115" r="6" fill="#f7c5d5" opacity="0.7"/>
+      <circle cx="315" cy="128" r="6" fill="#a03060" opacity="0.7"/>
+      <!-- Stars -->
+      <text x="50" y="400" font-size="24" fill="#e8829a" opacity="0.4">✦</text>
+      <text x="340" y="600" font-size="18" fill="#c4607a" opacity="0.4">✧</text>
+      <text x="160" y="250" font-size="20" fill="#f7c5d5" opacity="0.4">★</text>
+    </svg>
+  </div>
+
+  <div class="panel-content">
+    <div class="panel-icon">
+      <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <!-- Palette -->
+        <ellipse cx="34" cy="36" rx="24" ry="19" fill="#fde8ef" stroke="#c4607a" stroke-width="2"/>
+        <ellipse cx="46" cy="28" rx="10" ry="7" fill="#fde8ef" stroke="#c4607a" stroke-width="2"/>
+        <circle cx="24" cy="32" r="4" fill="#e8829a"/>
+        <circle cx="33" cy="28" r="4" fill="#c4607a"/>
+        <circle cx="43" cy="30" r="4" fill="#f7c5d5"/>
+        <circle cx="40" cy="42" r="4" fill="#a03060"/>
+        <circle cx="28" cy="44" r="4" fill="#d4607a"/>
+        <!-- Brush -->
+        <rect x="50" y="8" width="5" height="28" rx="2.5" fill="#d4a96a" transform="rotate(25,50,8)"/>
+        <ellipse cx="55" cy="40" rx="4" ry="6" fill="#c4607a" transform="rotate(25,55,40)"/>
+        <rect x="52" y="41" width="3" height="8" rx="1" fill="#8b2252" transform="rotate(25,52,41)"/>
+        <!-- Sparkles -->
+        <text x="6" y="18" font-size="12" fill="#e8829a">✦</text>
+        <text x="55" y="58" font-size="10" fill="#c4607a">✧</text>
+      </svg>
+    </div>
+    <div class="panel-label">Nick the<br>Drawer</div>
+    <div class="panel-sub">Digital Art & Illustrations</div>
+    <button class="panel-btn">Explore Gallery →</button>
+  </div>
+
+  <!-- Sparkles -->
+  <div class="sparkle" style="top:15%;left:10%;font-size:18px;color:#e8829a;animation-delay:0s">✦</div>
+  <div class="sparkle" style="top:70%;left:25%;font-size:13px;color:#c4607a;animation-delay:1.5s">✧</div>
+  <div class="sparkle" style="top:30%;left:80%;font-size:16px;color:#f7c5d5;animation-delay:3s">★</div>
+  <div class="sparkle" style="top:80%;left:60%;font-size:11px;color:#e8829a;animation-delay:0.8s">✦</div>
+</a>
+
+<!-- Divider -->
+<div class="divider"></div>
+
+<!-- Center ornament -->
+<div class="center-ornament">
+  <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="30" cy="30" r="28" fill="white" stroke="rgba(200,150,170,0.4)" stroke-width="1.5"/>
+    <text x="30" y="36" text-anchor="middle" font-size="22" fill="#c4607a">✦</text>
+  </svg>
+</div>
+
+<!-- Right Panel: Crochet -->
+<a class="panel panel-crochet" href="crochet.html">
+  <div class="bg-circles">
+    <div class="bg-circle" style="width:300px;height:300px;background:#8ec4b0;top:-60px;right:-60px;animation-delay:1s"></div>
+    <div class="bg-circle" style="width:220px;height:220px;background:#5a9e8a;bottom:80px;left:20px;animation-delay:3s"></div>
+    <div class="bg-circle" style="width:130px;height:130px;background:#d9efe8;top:40%;right:55%;animation-delay:5s"></div>
+  </div>
+
+  <!-- Crochet decorative SVG -->
+  <div class="panel-bg-crochet">
+    <svg viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" class="crochet-bg-svg" preserveAspectRatio="xMidYMid slice">
+      <!-- Yarn waves -->
+      <path d="M-20 120 Q80 80 160 140 Q240 200 320 150 Q400 100 440 160" stroke="#5a9e8a" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.5"/>
+      <path d="M-10 280 Q90 240 170 300 Q250 360 330 310 Q410 260 450 320" stroke="#8ec4b0" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.4"/>
+      <path d="M0 460 Q100 420 180 480 Q260 540 340 490 Q420 440 460 500" stroke="#b8d4c8" stroke-width="20" fill="none" stroke-linecap="round" opacity="0.45"/>
+      <path d="M-5 640 Q95 600 175 660 Q255 720 335 670 Q415 620 455 680" stroke="#5a9e8a" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.35"/>
+      <!-- Crochet hook -->
+      <path d="M320 60 L320 160 Q320 185 300 185 Q280 185 280 165 Q280 150 295 150" stroke="#2a7a60" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <rect x="315" y="55" width="10" height="30" rx="5" fill="#2a7a60" opacity="0.7"/>
+      <!-- Yarn balls -->
+      <circle cx="80" cy="380" r="28" fill="#b8d4c8" opacity="0.6"/>
+      <path d="M60 365 Q80 380 100 365" stroke="#5a9e8a" stroke-width="2" fill="none"/>
+      <path d="M58 375 Q80 390 102 375" stroke="#5a9e8a" stroke-width="2" fill="none"/>
+      <path d="M60 385 Q80 400 100 385" stroke="#5a9e8a" stroke-width="2" fill="none"/>
+      <circle cx="280" cy="620" r="22" fill="#8ec4b0" opacity="0.5"/>
+      <path d="M262 612 Q280 626 298 612" stroke="#2a7a60" stroke-width="2" fill="none"/>
+      <path d="M260 620 Q280 634 300 620" stroke="#2a7a60" stroke-width="2" fill="none"/>
+      <!-- Stars -->
+      <text x="350" y="400" font-size="22" fill="#5a9e8a" opacity="0.4">✦</text>
+      <text x="30" y="560" font-size="16" fill="#2a7a60" opacity="0.4">✧</text>
+      <text x="200" y="700" font-size="20" fill="#8ec4b0" opacity="0.4">★</text>
+    </svg>
+  </div>
+
+  <div class="panel-content">
+    <div class="panel-icon">
+      <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <!-- Crochet hook -->
+        <path d="M48 10 L48 46 Q48 56 40 56 Q32 56 32 48 Q32 42 38 42" stroke="#1e5c4a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <rect x="44" y="8" width="8" height="18" rx="4" fill="#5a9e8a"/>
+        <rect x="44" y="8" width="8" height="10" rx="4" fill="#2a7a60"/>
+        <!-- Yarn ball -->
+        <circle cx="22" cy="44" r="15" fill="#b8d4c8" stroke="#5a9e8a" stroke-width="1.5"/>
+        <ellipse cx="22" cy="44" rx="15" ry="6" fill="none" stroke="#5a9e8a" stroke-width="1.2"/>
+        <ellipse cx="22" cy="44" rx="6" ry="15" fill="none" stroke="#5a9e8a" stroke-width="1.2"/>
+        <!-- Yarn line from ball to hook -->
+        <path d="M30 38 Q40 30 44 26" stroke="#5a9e8a" stroke-width="2" stroke-dasharray="3 2" stroke-linecap="round"/>
+        <!-- Sparkles -->
+        <text x="6" y="20" font-size="12" fill="#5a9e8a">✦</text>
+        <text x="54" y="60" font-size="10" fill="#2a7a60">✧</text>
+      </svg>
+    </div>
+    <div class="panel-label">Nick Crafts<br>Heaven</div>
+    <div class="panel-sub">Handmade Crochet Creations</div>
+    <button class="panel-btn">Visit Shop →</button>
+  </div>
+
+  <!-- Sparkles -->
+  <div class="sparkle" style="top:20%;right:12%;font-size:17px;color:#5a9e8a;animation-delay:0.5s">✦</div>
+  <div class="sparkle" style="top:65%;right:22%;font-size:12px;color:#2a7a60;animation-delay:2s">✧</div>
+  <div class="sparkle" style="top:40%;right:75%;font-size:15px;color:#b8d4c8;animation-delay:3.5s">★</div>
+  <div class="sparkle" style="top:85%;right:55%;font-size:11px;color:#5a9e8a;animation-delay:1.2s">✦</div>
+</a>
+
+<script>
+// Floating petals / yarn bits
+const floatersEl = document.getElementById('floaters');
+const artSymbols = ['✦','✧','◇','○','✿','❀'];
+const crochetSymbols = ['✦','✧','◇','○','❋','✿'];
+
+for (let i = 0; i < 30; i++) {
+  const el = document.createElement('div');
+  el.className = 'floater';
+  const isLeft = Math.random() > 0.5;
+  const symbols = isLeft ? artSymbols : crochetSymbols;
+  el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+  el.style.left = (Math.random() * 100) + '%';
+  el.style.fontSize = (Math.random() * 14 + 8) + 'px';
+  el.style.color = isLeft
+    ? `hsl(340,${Math.floor(Math.random()*30+50)}%,${Math.floor(Math.random()*20+55)}%)`
+    : `hsl(160,${Math.floor(Math.random()*30+40)}%,${Math.floor(Math.random()*20+45)}%)`;
+  el.style.animationDuration = (Math.random() * 8 + 6) + 's';
+  el.style.animationDelay = (Math.random() * 10) + 's';
+  floatersEl.appendChild(el);
+}
+</script>
+</body>
+</html>

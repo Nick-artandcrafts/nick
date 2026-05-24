@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nick Crafts Heaven ✦ Crochet</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --sage:    #8ec4a8;
+  --mint:    #c8e8d8;
+  --foam:    #e4f5ec;
+  --deep:    #1e5c4a;
+  --teal:    #3a8a6e;
+  --moss:    #5aaa88;
+  --cream:   #fafdf8;
+  --warm:    #f5f0e8;
+  --sand:    #e8dfc8;
+  --gold:    #c8a050;
+  --blush:   #f2e0d8;
+  --peach:   #e8c0a8;
+  --text:    #2a3d35;
+  --mid:     #5a7a6a;
+  --light:   #8aaa98;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ===== CURSOR ===== */
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--teal);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+}
+.cursor-ring {
+  width: 34px; height: 34px;
+  border: 1.5px solid var(--sage);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.18s ease, width 0.3s, height 0.3s, border-color 0.3s;
+  opacity: 0.7;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 3rem;
+  background: rgba(250,253,248,0.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(142,196,168,0.25);
+  transition: padding 0.3s;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-style: italic;
+  color: var(--deep); text-decoration: none; letter-spacing: 0.03em;
+}
+.nav-logo span { color: var(--moss); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.82rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--mid);
+  text-decoration: none; font-weight: 600;
+  position: relative; transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 1.5px; background: var(--moss);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.nav-links a:hover { color: var(--teal); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-back {
+  font-size: 0.78rem; letter-spacing: 0.08em;
+  color: var(--light); text-decoration: none;
+  text-transform: uppercase; transition: color 0.3s;
+}
+.nav-back:hover { color: var(--teal); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; padding-top: 80px;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 65% 55% at 15% 40%, rgba(196,232,214,0.5) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 60% at 85% 55%, rgba(232,220,200,0.4) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 45% at 50% 90%, rgba(142,196,168,0.25) 0%, transparent 60%),
+    var(--cream);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; padding: 2rem;
+  animation: fade-up 1s ease both;
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1.05rem;
+  color: var(--moss); letter-spacing: 0.18em;
+  margin-bottom: 1rem;
+  animation: fade-up 1s ease 0.2s both;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.2rem, 9vw, 7rem);
+  font-weight: 700; line-height: 0.95;
+  color: var(--deep); margin-bottom: 1.2rem;
+  animation: fade-up 1s ease 0.35s both;
+}
+.hero-title em { font-style: italic; color: var(--moss); }
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  color: var(--mid); font-style: italic;
+  margin-bottom: 2.5rem; letter-spacing: 0.04em;
+  animation: fade-up 1s ease 0.5s both;
+}
+.hero-cta {
+  display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+  animation: fade-up 1s ease 0.65s both;
+}
+.btn {
+  padding: 0.75rem 2rem; border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  border: none; display: inline-block;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--moss), var(--teal));
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(58,138,110,0.35);
+}
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 14px 34px rgba(58,138,110,0.45);
+}
+.btn-outline {
+  background: transparent; color: var(--teal);
+  border: 2px solid var(--teal);
+}
+.btn-outline:hover {
+  background: var(--teal); color: #fff;
+  transform: translateY(-3px) scale(1.04);
+}
+
+/* yarn spool animation */
+.hero-yarn {
+  position: absolute; pointer-events: none; z-index: 1;
+}
+
+/* Scroll indicator */
+.scroll-ind {
+  position: absolute; bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem; z-index: 2;
+  animation: fade-up 1s ease 1s both;
+}
+.scroll-ind span { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light); }
+.scroll-line {
+  width: 1.5px; height: 40px;
+  background: linear-gradient(to bottom, var(--moss), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse {
+  0%,100% { transform: scaleY(1); opacity: 0.6; }
+  50% { transform: scaleY(1.3); opacity: 1; }
+}
+
+/* ===== SECTION BASE ===== */
+section { padding: 6rem 2rem; }
+.section-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 0.9rem;
+  color: var(--moss); letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 0.8rem;
+  display: block;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700; color: var(--deep);
+  line-height: 1.15; margin-bottom: 1.5rem;
+}
+.section-title em { font-style: italic; color: var(--moss); }
+
+/* ===== ABOUT ===== */
+.about-wrap { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: center; }
+
+.about-visual { position: relative; }
+.about-frame {
+  width: 100%; aspect-ratio: 4/5;
+  background: linear-gradient(145deg, var(--foam), var(--mint) 50%, var(--sand));
+  border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  animation: morph-green 9s ease-in-out infinite;
+  box-shadow: 0 20px 60px rgba(58,138,110,0.18);
+}
+@keyframes morph-green {
+  0%,100% { border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%; }
+  33%      { border-radius: 55% 45% 40% 60% / 60% 50% 40% 50%; }
+  66%      { border-radius: 40% 60% 55% 45% / 45% 55% 50% 50%; }
+}
+.about-float {
+  position: absolute; border-radius: 50%;
+  background: white; box-shadow: 0 4px 20px rgba(58,138,110,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  animation: float-bob 4s ease-in-out infinite;
+}
+@keyframes float-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.about-float.f1 { width:58px;height:58px; top:-8px; right:8%; animation-delay:0s; }
+.about-float.f2 { width:46px;height:46px; bottom:12%; left:-6%; animation-delay:1.4s; }
+.about-float.f3 { width:52px;height:52px; bottom:-4%; right:18%; animation-delay:2.8s; }
+
+.about-bio {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; line-height: 1.9;
+  color: var(--mid); margin-bottom: 1.4rem;
+}
+.about-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+.tag {
+  padding: 0.35rem 1rem; border-radius: 50px;
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em;
+  border: 1.5px solid var(--mint); color: var(--teal); background: var(--foam);
+  transition: all 0.3s;
+}
+.tag:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
+
+/* ===== YARN DIVIDER ===== */
+.yarn-divider { text-align: center; padding: 1.2rem 0; opacity: 0.4; }
+.yarn-divider svg { width: 240px; height: 28px; }
+
+/* ===== PRICING SECTION ===== */
+.pricing-section {
+  background: linear-gradient(135deg, #eef8f2 0%, #f5f0e8 50%, #e8f5ee 100%);
+  position: relative; overflow: hidden;
+}
+.pricing-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='52' height='52' viewBox='0 0 52 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Ccircle cx='26' cy='26' r='2' fill='%238ec4a8' fill-opacity='0.12'/%3E%3C/g%3E%3C/svg%3E");
+}
+.pricing-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.pricing-intro { text-align: center; margin-bottom: 4rem; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.6rem; }
+
+.price-card {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 24px; padding: 2rem 1.6rem;
+  border: 1.5px solid rgba(142,196,168,0.3);
+  position: relative; overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  cursor: default;
+}
+.price-card::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--mint), var(--moss), var(--sand));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+}
+.price-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(58,138,110,0.14); border-color: rgba(142,196,168,0.6); }
+.price-card:hover::after { transform: scaleX(1); }
+.price-card.featured { background: linear-gradient(135deg,rgba(58,138,110,0.07),rgba(200,224,208,0.15)); border-color: rgba(58,138,110,0.35); }
+.featured-badge {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  background: linear-gradient(135deg, var(--moss), var(--teal));
+  color: #fff; font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.25rem 0.75rem; border-radius: 50px;
+}
+.price-icon { font-size: 2.4rem; margin-bottom: 1rem; }
+.price-type { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--deep); margin-bottom: 0.35rem; }
+.price-desc { font-size: 0.84rem; color: var(--mid); line-height: 1.6; margin-bottom: 1.5rem; }
+.price-amount { font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 700; color: var(--teal); }
+.price-amount span { font-size: 0.95rem; color: var(--light); font-family: 'Nunito', sans-serif; }
+.price-features { margin-top: 1.2rem; list-style: none; }
+.price-features li { font-size: 0.83rem; color: var(--mid); padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem; }
+.price-features li::before { content: '✦'; font-size: 0.6rem; color: var(--moss); flex-shrink: 0; }
+
+/* ===== SHOP / GALLERY ===== */
+.shop-section { max-width: 1300px; margin: 0 auto; }
+.shop-intro { text-align: center; margin-bottom: 3rem; }
+.shop-filters { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+.filter-btn {
+  padding: 0.45rem 1.4rem; border-radius: 50px;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; cursor: pointer;
+  border: 1.5px solid var(--mint); background: transparent; color: var(--moss);
+  transition: all 0.3s;
+}
+.filter-btn.active, .filter-btn:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
+
+/* Shop grid */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.8rem;
+}
+
+/* Each shop card */
+.shop-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1.5px solid rgba(142,196,168,0.25);
+  box-shadow: 0 4px 20px rgba(58,138,110,0.08);
+  transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  cursor: pointer;
+  position: relative;
+}
+.shop-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 20px 50px rgba(58,138,110,0.16);
+  border-color: rgba(142,196,168,0.55);
+}
+
+/* Image area with natural dimensions */
+.shop-img-wrap {
+  width: 100%;
+  background: var(--foam);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 200px;
+}
+.shop-img-wrap img,
+.shop-img-wrap svg {
+  width: 100%; display: block;
+  transition: transform 0.5s ease;
+}
+.shop-card:hover .shop-img-wrap img,
+.shop-card:hover .shop-img-wrap svg { transform: scale(1.05); }
+
+/* Sold-out ribbon */
+.ribbon-sold {
+  position: absolute; top: 14px; left: -8px;
+  background: #c05050; color: #fff;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.25rem 1rem;
+  border-radius: 0 4px 4px 0;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+}
+.ribbon-sold::before {
+  content: ''; position: absolute;
+  left: 0; bottom: -6px;
+  border: 3px solid #8b3535;
+  border-left-color: transparent; border-bottom-color: transparent;
+}
+
+/* Available badge */
+.badge-avail {
+  position: absolute; top: 12px; right: 12px;
+  background: rgba(90,170,136,0.15);
+  border: 1px solid rgba(90,170,136,0.5);
+  color: var(--teal);
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.07em;
+  padding: 0.2rem 0.7rem; border-radius: 50px;
+  text-transform: uppercase;
+}
+
+/* Card body */
+.shop-info {
+  padding: 1.2rem 1.4rem 1.4rem;
+}
+.shop-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 700; color: var(--deep);
+  margin-bottom: 0.25rem;
+}
+.shop-cat {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 0.88rem; color: var(--light);
+  margin-bottom: 0.8rem;
+}
+.shop-desc {
+  font-size: 0.82rem; color: var(--mid); line-height: 1.55;
+  margin-bottom: 1rem;
+}
+.shop-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(142,196,168,0.2);
+  padding-top: 0.85rem; margin-top: 0.2rem;
+}
+.shop-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.45rem; font-weight: 700; color: var(--teal);
+}
+.shop-price.sold { color: var(--light); text-decoration: line-through; font-size: 1.1rem; }
+.shop-buy {
+  padding: 0.45rem 1.1rem; border-radius: 50px;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; cursor: pointer; border: none;
+  background: linear-gradient(135deg, var(--moss), var(--teal));
+  color: #fff; transition: all 0.3s;
+}
+.shop-buy:hover { transform: scale(1.07); box-shadow: 0 6px 18px rgba(58,138,110,0.3); }
+.shop-buy:disabled { background: var(--sand); color: var(--light); cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* Wishlist heart */
+.shop-heart {
+  position: absolute; top: 12px; left: 12px;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; cursor: pointer; border: none;
+  transition: all 0.3s; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  opacity: 0;
+}
+.shop-card:hover .shop-heart { opacity: 1; }
+.shop-heart.loved { opacity: 1; }
+.shop-heart:hover { transform: scale(1.2); }
+
+/* ===== CONTACT ===== */
+.contact-section {
+  background: linear-gradient(135deg, var(--deep) 0%, #16473a 50%, #0e2e25 100%);
+  position: relative; overflow: hidden;
+}
+.contact-section::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 60% at 20% 50%, rgba(142,196,168,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 80% 40%, rgba(200,160,80,0.08) 0%, transparent 60%);
+}
+.contact-inner { max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+.contact-inner .section-title { color: #fff; }
+.contact-inner .section-tag { color: var(--mint); }
+.contact-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.15rem; color: rgba(255,255,255,0.65); margin-bottom: 3rem; }
+.social-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+.social-link {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 1rem 2rem; border-radius: 60px;
+  text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em;
+  transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  border: 1.5px solid rgba(255,255,255,0.18);
+  color: #fff; background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(8px);
+}
+.social-link:hover { transform: translateY(-5px) scale(1.05); background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.38); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+.social-icon { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.social-link.insta .social-icon { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.social-link.fb .social-icon { background: #1877f2; }
+.social-link.discord .social-icon { background: #5865f2; }
+.contact-note { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(255,255,255,0.4); }
+
+/* ===== MODAL ===== */
+.modal-bg {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(14,40,30,0.88); backdrop-filter: blur(12px);
+  align-items: center; justify-content: center; padding: 1.5rem;
+}
+.modal-bg.open { display: flex; animation: fade-in 0.3s ease; }
+@keyframes fade-in { from {opacity:0;} to {opacity:1;} }
+.modal {
+  background: white; border-radius: 24px;
+  max-width: 680px; width: 100%;
+  overflow: hidden; position: relative;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+  animation: modal-in 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes modal-in { from {transform:scale(0.88) translateY(20px);opacity:0;} to {transform:scale(1) translateY(0);opacity:1;} }
+.modal-close {
+  position: absolute; top: 1rem; right: 1.2rem;
+  font-size: 1.6rem; color: var(--mid); cursor: pointer;
+  background: none; border: none; line-height: 1; transition: transform 0.3s;
+  z-index: 2;
+}
+.modal-close:hover { transform: rotate(90deg); }
+.modal-img { width: 100%; display: block; max-height: 360px; object-fit: cover; }
+.modal-body { padding: 1.6rem 2rem; }
+.modal-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--deep); margin-bottom: 0.25rem; }
+.modal-cat { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--moss); font-size: 0.95rem; margin-bottom: 1rem; }
+.modal-desc { font-size: 0.9rem; color: var(--mid); line-height: 1.7; margin-bottom: 1.5rem; }
+.modal-details { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+.modal-detail { background: var(--foam); border-radius: 12px; padding: 0.6rem 1.1rem; font-size: 0.82rem; color: var(--mid); }
+.modal-detail strong { display: block; color: var(--deep); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.15rem; }
+.modal-footer { display: flex; align-items: center; justify-content: space-between; }
+.modal-price { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--teal); }
+.modal-price.sold { color: var(--light); text-decoration: line-through; font-size: 1.4rem; }
+
+/* ===== FLOATING PARTICLES ===== */
+.floaters { position: fixed; inset: 0; pointer-events: none; z-index: 50; overflow: hidden; }
+.floater {
+  position: absolute; opacity: 0;
+  animation: float-rise 12s ease-in-out infinite;
+}
+@keyframes float-rise {
+  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  8% { opacity: 0.5; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-10vh) rotate(300deg); opacity: 0; }
+}
+
+/* ===== REVEAL ===== */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+.stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.stagger.visible > *:nth-child(1) { opacity:1;transform:translateY(0);transition-delay:0.05s; }
+.stagger.visible > *:nth-child(2) { opacity:1;transform:translateY(0);transition-delay:0.15s; }
+.stagger.visible > *:nth-child(3) { opacity:1;transform:translateY(0);transition-delay:0.25s; }
+.stagger.visible > *:nth-child(4) { opacity:1;transform:translateY(0);transition-delay:0.35s; }
+.stagger.visible > *:nth-child(5) { opacity:1;transform:translateY(0);transition-delay:0.45s; }
+.stagger-shop > * { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.stagger-shop.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:0.05s}
+.stagger-shop.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:0.12s}
+.stagger-shop.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:0.19s}
+.stagger-shop.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:0.26s}
+.stagger-shop.visible > *:nth-child(5){opacity:1;transform:none;transition-delay:0.33s}
+.stagger-shop.visible > *:nth-child(6){opacity:1;transform:none;transition-delay:0.40s}
+.stagger-shop.visible > *:nth-child(7){opacity:1;transform:none;transition-delay:0.47s}
+.stagger-shop.visible > *:nth-child(8){opacity:1;transform:none;transition-delay:0.54s}
+
+footer { text-align: center; padding: 2rem; background: var(--deep); color: rgba(255,255,255,0.3); font-size: 0.78rem; letter-spacing: 0.1em; }
+footer a { color: var(--mint); text-decoration: none; }
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .about-wrap { grid-template-columns: 1fr; gap: 3rem; }
+  .about-frame { max-width: 280px; margin: 0 auto; }
+  .shop-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  section { padding: 4rem 1.2rem; }
+  .modal-body { padding: 1.2rem 1.4rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="floaters" id="floaters"></div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div id="modalImgWrap"></div>
+    <div class="modal-body">
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-cat" id="modalCat"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-details" id="modalDetails"></div>
+      <div class="modal-footer">
+        <div class="modal-price" id="modalPrice"></div>
+        <button class="btn btn-primary" id="modalBuy">Order via DM ✦</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html"><span data-nick="name">Nick</span> <span>✦</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-back" href="index.html">← All of Nick</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+
+  <!-- SVG decoration: crochet tools scattered -->
+  <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <!-- yarn waves -->
+    <path d="M-40 200 Q150 140 350 210 Q550 280 750 200 Q950 120 1150 200 Q1300 260 1440 200" stroke="rgba(142,196,168,0.2)" stroke-width="50" fill="none" stroke-linecap="round"/>
+    <path d="M-40 600 Q160 540 360 610 Q560 680 760 600 Q960 520 1160 600 Q1310 660 1440 600" stroke="rgba(200,224,210,0.22)" stroke-width="40" fill="none" stroke-linecap="round"/>
+    <!-- Crochet hook left -->
+    <g transform="translate(80,120) rotate(-20)">
+      <rect x="0" y="0" width="12" height="80" rx="6" fill="rgba(90,170,136,0.35)"/>
+      <rect x="0" y="0" width="12" height="30" rx="6" fill="rgba(58,138,110,0.4)"/>
+      <path d="M6 80 Q6 100 -4 100 Q-14 100 -14 90 Q-14 82 0 82" stroke="rgba(58,138,110,0.4)" stroke-width="5" fill="none" stroke-linecap="round"/>
+    </g>
+    <!-- Crochet hook right -->
+    <g transform="translate(1300,580) rotate(15)">
+      <rect x="0" y="0" width="10" height="70" rx="5" fill="rgba(90,170,136,0.28)"/>
+      <rect x="0" y="0" width="10" height="24" rx="5" fill="rgba(58,138,110,0.32)"/>
+      <path d="M5 70 Q5 88 -3 88 Q-11 88 -11 80 Q-11 73 0 73" stroke="rgba(58,138,110,0.32)" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </g>
+    <!-- Yarn ball left bottom -->
+    <g transform="translate(120,640)">
+      <circle cx="0" cy="0" r="45" fill="rgba(200,232,216,0.35)" stroke="rgba(142,196,168,0.3)" stroke-width="1.5"/>
+      <ellipse cx="0" cy="0" rx="45" ry="18" fill="none" stroke="rgba(142,196,168,0.3)" stroke-width="1.2"/>
+      <ellipse cx="0" cy="0" rx="18" ry="45" fill="none" stroke="rgba(142,196,168,0.3)" stroke-width="1.2"/>
+    </g>
+    <!-- Yarn ball right top -->
+    <g transform="translate(1300,130)">
+      <circle cx="0" cy="0" r="38" fill="rgba(232,215,190,0.3)" stroke="rgba(200,160,80,0.25)" stroke-width="1.2"/>
+      <ellipse cx="0" cy="0" rx="38" ry="15" fill="none" stroke="rgba(200,160,80,0.25)" stroke-width="1"/>
+      <ellipse cx="0" cy="0" rx="15" ry="38" fill="none" stroke="rgba(200,160,80,0.25)" stroke-width="1"/>
+    </g>
+    <!-- Stars -->
+    <text x="250" y="80" font-size="24" fill="rgba(90,170,136,0.22)">✦</text>
+    <text x="1160" y="700" font-size="20" fill="rgba(90,170,136,0.2)">✧</text>
+    <text x="700" y="55" font-size="16" fill="rgba(90,170,136,0.18)">★</text>
+    <text x="60" y="390" font-size="18" fill="rgba(200,160,80,0.22)">✿</text>
+    <text x="1360" y="400" font-size="16" fill="rgba(200,160,80,0.2)">❀</text>
+  </svg>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">✦ Handcrafted Crochet Creations ✦</p>
+    <h1 class="hero-title"><span data-nick="name">Nick Crafts</span><br><em>Heaven</em></h1>
+    <p class="hero-sub">Each stitch made with love, each piece a little hug<br>you can hold in your hands</p>
+    <div class="hero-cta">
+      <a href="#shop" class="btn btn-primary">Browse the Shop</a>
+      <a href="#pricing" class="btn btn-outline">Custom Orders</a>
+    </div>
+  </div>
+  <div class="scroll-ind">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="padding:6rem 2rem;">
+  <div class="about-wrap">
+    <div class="about-visual reveal-left">
+      <div class="about-frame">
+        <img data-nick="avatar" src="" alt="Nick's avatar"
+             style="width:100%;height:100%;object-fit:cover;display:none;border-radius:inherit;"
+             onload="this.style.display='block';this.nextElementSibling.style.display='none';">
+        <svg width="190" height="200" viewBox="0 0 190 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Crafter avatar -->
+          <circle cx="95" cy="72" r="48" fill="#c8e8d8" stroke="#8ec4a8" stroke-width="2"/>
+          <circle cx="95" cy="66" r="30" fill="#e4f5ec"/>
+          <!-- Face -->
+          <circle cx="85" cy="61" r="4" fill="#3a8a6e"/>
+          <circle cx="105" cy="61" r="4" fill="#3a8a6e"/>
+          <path d="M87 74 Q95 82 103 74" stroke="#3a8a6e" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <!-- Rosy cheeks -->
+          <circle cx="78" cy="68" r="6" fill="rgba(232,130,100,0.2)"/>
+          <circle cx="112" cy="68" r="6" fill="rgba(232,130,100,0.2)"/>
+          <!-- Hair -->
+          <path d="M65 60 Q68 36 95 33 Q122 36 125 60" fill="#5aaa88"/>
+          <path d="M63 63 Q58 48 63 38 Q76 22 95 20 Q114 22 127 38 Q132 48 127 63" fill="#5aaa88"/>
+          <!-- Two little buns -->
+          <circle cx="66" cy="44" r="12" fill="#5aaa88"/>
+          <circle cx="124" cy="44" r="12" fill="#5aaa88"/>
+          <!-- Body with yarn -->
+          <path d="M60 120 Q60 100 80 95 Q95 92 95 92 Q95 92 110 95 Q130 100 130 120 L130 138 L60 138 Z" fill="#3a8a6e"/>
+          <!-- Crochet hook in hand -->
+          <g transform="translate(125,88) rotate(30)">
+            <rect x="-3" y="0" width="6" height="36" rx="3" fill="#c8a050"/>
+            <rect x="-3" y="0" width="6" height="12" rx="3" fill="#8aaa98"/>
+            <path d="M0 36 Q0 46 -6 46 Q-12 46 -12 40" stroke="#3a8a6e" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          </g>
+          <!-- Yarn ball on lap -->
+          <circle cx="78" cy="130" r="14" fill="#c8e8d8" stroke="#8ec4a8" stroke-width="1.2"/>
+          <ellipse cx="78" cy="130" rx="14" ry="6" fill="none" stroke="#8ec4a8" stroke-width="1"/>
+          <ellipse cx="78" cy="130" rx="6" ry="14" fill="none" stroke="#8ec4a8" stroke-width="1"/>
+          <!-- Sparkles -->
+          <text x="15" y="40" font-size="14" fill="rgba(90,170,136,0.55)">✦</text>
+          <text x="155" y="90" font-size="12" fill="rgba(200,160,80,0.55)">✧</text>
+          <text x="10" y="160" font-size="10" fill="rgba(90,170,136,0.4)">✿</text>
+        </svg>
+      </div>
+      <div class="about-float f1">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="8" stroke="#5aaa88" stroke-width="1.5"/>
+          <path d="M5 11 Q8 7 11 11 Q14 15 17 11" stroke="#5aaa88" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="about-float f2">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 2 L11.8 7.6 H17.6 L12.9 11 L14.7 16.6 L10 13.2 L5.3 16.6 L7.1 11 L2.4 7.6 H8.2 Z" fill="#3a8a6e" opacity="0.65"/>
+        </svg>
+      </div>
+      <div class="about-float f3">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="14" height="14" rx="7" stroke="#5aaa88" stroke-width="1.5"/>
+          <rect x="7" y="7" width="6"  height="6"  rx="3" fill="#5aaa88" opacity="0.6"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="reveal-right">
+      <span class="section-tag">✦ About the Maker</span>
+      <h2 class="section-title" data-nick="about-heading">Hey, it's <em>Nick!</em></h2>
+      <p class="about-bio" data-nick="about-bio1">I've been crocheting since I was a kid, and I never stopped. There's something magical about turning a single strand of yarn into something soft, squishy, and full of personality — whether it's an amigurumi frog with tiny legs or a cosy cardigan that feels like a hug.</p>
+      <p class="about-bio" data-nick="about-bio2">Every item in this shop is handmade by me, with care and a silly amount of love. Custom orders welcome — if you can dream it, I can (probably) crochet it!</p>
+      <div class="about-tags" data-nick="about-tags">
+        <span class="tag">Amigurumi</span>
+        <span class="tag">Plushies</span>
+        <span class="tag">Cardigans</span>
+        <span class="tag">Beanies</span>
+        <span class="tag">Bags & Totes</span>
+        <span class="tag">Coasters</span>
+        <span class="tag">Custom Orders</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YARN DIVIDER -->
+<div class="yarn-divider">
+  <svg viewBox="0 0 480 28" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 14 Q40 6 80 14 Q120 22 160 14 Q200 6 240 14 Q280 22 320 14 Q360 6 400 14 Q440 22 480 14" stroke="#8ec4a8" stroke-width="2" fill="none"/>
+    <circle cx="240" cy="14" r="5" fill="#8ec4a8" opacity="0.7"/>
+    <circle cx="120" cy="14" r="3" fill="#8ec4a8" opacity="0.4"/>
+    <circle cx="360" cy="14" r="3" fill="#8ec4a8" opacity="0.4"/>
+  </svg>
+</div>
+
+<!-- PRICING -->
+<section id="pricing" class="pricing-section">
+  <div class="pricing-inner">
+    <div class="pricing-intro reveal">
+      <span class="section-tag">✦ Custom Order Pricing</span>
+      <h2 class="section-title">Made Just <em>for You</em></h2>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mid);max-width:500px;margin:0 auto;">
+        All custom work is priced to reflect the time, yarn, and love that goes in. Ready-made items have individual prices in the shop below.
+      </p>
+    </div>
+
+    <div class="pricing-grid stagger" data-nick="pricingGrid">
+      <div class="price-card">
+        <div class="price-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="18" r="8" stroke="#3a8a6e" stroke-width="1.8"/><circle cx="11" cy="11" r="3.5" stroke="#3a8a6e" stroke-width="1.5"/><circle cx="21" cy="11" r="3.5" stroke="#3a8a6e" stroke-width="1.5"/><circle cx="13" cy="17" r="1.5" fill="#3a8a6e"/><circle cx="19" cy="17" r="1.5" fill="#3a8a6e"/><path d="M13 22 Q16 25 19 22" stroke="#3a8a6e" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+        </div>
+        <div class="price-type">Mini Amigurumi</div>
+        <div class="price-desc">Small plushie characters (approx. 8–12cm). Cute, squishy, and customisable in any colour combo.</div>
+        <div class="price-amount">$22 <span>each</span></div>
+        <ul class="price-features">
+          <li>Choice of colours</li>
+          <li>Safety eyes included</li>
+          <li>Approx. 8–12cm</li>
+          <li>2–3 week turnaround</li>
+        </ul>
+      </div>
+
+      <div class="price-card featured">
+        <div class="featured-badge">Most Loved</div>
+        <div class="price-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="19" r="8" stroke="#3a8a6e" stroke-width="1.8"/><circle cx="9"  cy="10" r="4" stroke="#3a8a6e" stroke-width="1.5"/><circle cx="23" cy="10" r="4" stroke="#3a8a6e" stroke-width="1.5"/><circle cx="13" cy="18" r="1.5" fill="#3a8a6e"/><circle cx="19" cy="18" r="1.5" fill="#3a8a6e"/><ellipse cx="16" cy="22" rx="3" ry="2" stroke="#3a8a6e" stroke-width="1.3"/></svg>
+        </div>
+        <div class="price-type">Large Plushie</div>
+        <div class="price-desc">Big huggable plushies (20–30cm). Perfect gifts — animals, characters, OCs, you name it!</div>
+        <div class="price-amount">$55 <span>each</span></div>
+        <ul class="price-features">
+          <li>Custom character design</li>
+          <li>Premium yarn</li>
+          <li>Approx. 20–30cm</li>
+          <li>3–4 week turnaround</li>
+          <li>Gift-ready packaging</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="price-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M10 6 Q16 4 22 6 L24 26 Q18 28 12 26 Z" stroke="#3a8a6e" stroke-width="1.8" fill="none" stroke-linejoin="round"/><line x1="10" y1="12" x2="22" y2="12" stroke="#3a8a6e" stroke-width="1.2" stroke-dasharray="2 2"/><line x1="10" y1="17" x2="22" y2="17" stroke="#3a8a6e" stroke-width="1.2" stroke-dasharray="2 2"/><line x1="11" y1="22" x2="21" y2="22" stroke="#3a8a6e" stroke-width="1.2" stroke-dasharray="2 2"/></svg>
+        </div>
+        <div class="price-type">Wearables</div>
+        <div class="price-desc">Beanies, scarves, and fingerless gloves. Cosy accessories made to your measurements.</div>
+        <div class="price-amount">$38 <span>& up</span></div>
+        <ul class="price-features">
+          <li>Custom sizing</li>
+          <li>Choice of yarn weight</li>
+          <li>Colour customisation</li>
+          <li>2–3 week turnaround</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="price-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M7 13 L8 27 Q8 28 9 28 H23 Q24 28 24 27 L25 13 Z" stroke="#3a8a6e" stroke-width="1.8" fill="none" stroke-linejoin="round"/><path d="M12 13 Q12 7 16 7 Q20 7 20 13" stroke="#3a8a6e" stroke-width="1.6" fill="none" stroke-linecap="round"/><line x1="7" y1="18" x2="25" y2="18" stroke="#3a8a6e" stroke-width="1.2" stroke-dasharray="2 2"/></svg>
+        </div>
+        <div class="price-type">Bags & Totes</div>
+        <div class="price-desc">Market bags, bucket bags, mini pouches — functional and adorable crochet accessories.</div>
+        <div class="price-amount">$45 <span>& up</span></div>
+        <ul class="price-features">
+          <li>Multiple size options</li>
+          <li>Cotton or raffia yarn</li>
+          <li>Lining optional (+$8)</li>
+          <li>3 week turnaround</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="price-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M5 7 Q5 5 7 5 H25 Q27 5 27 7 V19 Q27 21 25 21 H13 L7 27 V21 H7 Q5 21 5 19 Z" stroke="#3a8a6e" stroke-width="1.8" fill="none" stroke-linejoin="round"/><line x1="10" y1="11" x2="22" y2="11" stroke="#3a8a6e" stroke-width="1.3" stroke-linecap="round"/><line x1="10" y1="15" x2="18" y2="15" stroke="#3a8a6e" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </div>
+        <div class="price-type">Custom Quote</div>
+        <div class="price-desc">Cardigans, blankets, sets, special requests — send a DM and let's figure it out together!</div>
+        <div class="price-amount">DM <span>me ✦</span></div>
+        <ul class="price-features">
+          <li>Cardigans & tops</li>
+          <li>Baby blankets & sets</li>
+          <li>Keychains & charms</li>
+          <li>Bulk orders welcome</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:3rem;" class="reveal">
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--mid);font-size:0.95rem;margin-bottom:1.2rem;">
+        ✦ Yarn cost included unless premium yarn is requested &nbsp;|&nbsp; Shipping calculated at checkout ✦
+      </p>
+      <a href="#contact" class="btn btn-primary">Place a Custom Order</a>
+    </div>
+  </div>
+</section>
+
+<!-- YARN DIVIDER -->
+<div class="yarn-divider">
+  <svg viewBox="0 0 480 28" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 14 Q40 22 80 14 Q120 6 160 14 Q200 22 240 14 Q280 6 320 14 Q360 22 400 14 Q440 6 480 14" stroke="#c8a050" stroke-width="2" fill="none" opacity="0.6"/>
+    <circle cx="240" cy="14" r="4" fill="#c8a050" opacity="0.5"/>
+  </svg>
+</div>
+
+<!-- SHOP -->
+<section id="shop" style="padding:6rem 2rem;">
+  <div class="shop-section">
+    <div class="shop-intro reveal">
+      <span class="section-tag">✦ Ready-Made Shop</span>
+      <h2 class="section-title">The <em>Collection</em></h2>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mid);">
+        One-of-a-kind pieces ready to go — each priced individually
+      </p>
+    </div>
+
+    <div class="shop-grid stagger-shop" id="shopGrid"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <span class="section-tag">✦ Let's Connect</span>
+    <h2 class="section-title">Find Nick</h2>
+    <p class="contact-sub">For orders, custom requests, or just to share your crochet pics —<br>Nick loves hearing from you</p>
+    <div class="social-links reveal stagger">
+      <a href="#" class="social-link insta" data-nick="insta-url">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="12" rx="3" stroke="white" stroke-width="1.5"/><circle cx="10" cy="11" r="3" stroke="white" stroke-width="1.4"/><path d="M7 5 L8.5 3 H11.5 L13 5" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Instagram</div>
+          <div>@nick.crafts.heaven</div>
+        </div>
+      </a>
+      <a href="#" class="social-link fb" data-nick="fb-url">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M11 17V11h2.5l0.5-3H11V6.5C11 5.7 11.3 5 12.5 5H14V2.3C13.5 2.2 12.6 2 11.5 2C9.1 2 7.5 3.5 7.5 6.2V8H5v3h2.5v6H11Z" fill="white"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Facebook</div>
+          <div>Nick Crafts Heaven</div>
+        </div>
+      </a>
+      <a href="#" class="social-link discord">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 3C5 3.5 3 5.5 2.5 8L2 13c0 1 1 1.5 1.8 1L5 13h10l1.2 1c.8.5 1.8 0 1.8-1L17.5 8C17 5.5 15 3.5 12.5 3L12 5H8L7.5 3Z" stroke="white" stroke-width="1.4" stroke-linejoin="round"/><circle cx="7.5" cy="10" r="1" fill="white"/><circle cx="12.5" cy="10" r="1" fill="white"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Discord</div>
+          <div data-nick="discord">nickcrafts#0002</div>
+        </div>
+      </a>
+    </div>
+    <p class="contact-note" data-nick="contact-note">DMs open for custom orders ✦ Usually replies within 24 hours</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Nick Crafts Heaven &nbsp;✦&nbsp; Handmade with care &nbsp;|&nbsp; <a href="index.html">← Back to Nick's World</a></p>
+</footer>
+<script src="firebase-data.js"></script>
+<script>
+// ===== SHOP ITEMS =====
+const shopItems = [
+  {
+    id:1, name:"Froggy McHop", cat:"amigurumi", catLabel:"Amigurumi",
+    price: 28, available: true,
+    desc: "A chubby little frog with the most earnest expression. Hand-stuffed, safety eyes, approx 14cm sitting. Made with soft cotton yarn.",
+    details: [{label:"Size", val:"~14cm"},{label:"Yarn", val:"Cotton"},{label:"Time", val:"Made to order"}],
+    palette:["#6aaa6a","#4a8a4a","#c8e8c8","#f0f8f0","#2a5a2a"]
+  },
+  {
+    id:2, name:"Cloud Beanie", cat:"wearable", catLabel:"Wearable",
+    price: 35, available: true,
+    desc: "Chunky ribbed beanie in soft cream yarn. One size fits most adults. So cosy you'll want to wear it indoors too.",
+    details: [{label:"Size", val:"One size"},{label:"Yarn", val:"Merino blend"},{label:"Care", val:"Hand wash"}],
+    palette:["#f5f0e8","#e8dfc8","#d4c8a8","#c8b888","#a89868"]
+  },
+  {
+    id:3, name:"Strawberry Pal", cat:"amigurumi", catLabel:"Amigurumi",
+    price: 22, available: false,
+    desc: "The cutest strawberry you've ever seen, with little seed details and a leafy green top. Sold out but available as a custom order!",
+    details: [{label:"Size", val:"~10cm"},{label:"Yarn", val:"Cotton"},{label:"Status", val:"Sold — custom available"}],
+    palette:["#e84040","#c82020","#60aa60","#f0f0e0","#ff8080"]
+  },
+  {
+    id:4, name:"Sage Market Bag", cat:"bag", catLabel:"Bag",
+    price: 42, available: true,
+    desc: "Open-weave market tote in sage green cotton. Stretchy, strong, and holds way more than you'd expect. Perfect for farmers markets.",
+    details: [{label:"Size", val:"34×38cm"},{label:"Yarn", val:"100% cotton"},{label:"Handles", val:"Rope handles"}],
+    palette:["#8ec4a8","#6aaa88","#c8e8d8","#e4f5ec","#3a8a6e"]
+  },
+  {
+    id:5, name:"Bunny Plush", cat:"amigurumi", catLabel:"Amigurumi",
+    price: 58, available: true,
+    desc: "Big floppy-eared bunny, super huggable at 25cm. Comes in any colour — this one is classic lilac with a pink inner ear.",
+    details: [{label:"Size", val:"~25cm"},{label:"Yarn", val:"Soft acrylic"},{label:"Ears", val:"Floppy style"}],
+    palette:["#d4b8e8","#b898cc","#f0e4f8","#e8d0f0","#8860a8"]
+  },
+  {
+    id:6, name:"Sunflower Coaster Set", cat:"home", catLabel:"Home Decor",
+    price: 18, available: true,
+    desc: "Set of 4 sunflower coasters worked in yellow and brown cotton. Thick enough to actually protect your surfaces, cute enough to leave out.",
+    details: [{label:"Set", val:"4 coasters"},{label:"Size", val:"~10cm dia."},{label:"Yarn", val:"Cotton"}],
+    palette:["#e8c040","#c8a020","#5a3a18","#f8e880","#a87828"]
+  },
+  {
+    id:7, name:"Ghost Keychain", cat:"amigurumi", catLabel:"Amigurumi",
+    price: 12, available: true,
+    desc: "Tiny boo ghost keychain with an expression that says 'I'm scary but also lonely'. Approx 6cm with keyring attached.",
+    details: [{label:"Size", val:"~6cm"},{label:"Yarn", val:"Cotton"},{label:"Include", val:"Keyring + clip"}],
+    palette:["#f0f0f0","#d8d8d8","#9090c8","#e0e0f0","#4848a0"]
+  },
+  {
+    id:8, name:"Dusty Rose Bucket Bag", cat:"bag", catLabel:"Bag",
+    price: 52, available: true,
+    desc: "Structured bucket bag in dusty rose with a cream lining. Magnetic snap closure, inner pocket, adjustable strap.",
+    details: [{label:"Size", val:"22×20cm"},{label:"Yarn", val:"Cotton + lining"},{label:"Closure", val:"Magnetic snap"}],
+    palette:["#e8b0a0","#c89080","#f0d8d0","#d4a090","#a86858"]
+  },
+];
+
+// Generate CSS art for each item
+function makeItemArt(item) {
+  const [c1,c2,c3,c4,c5] = item.palette;
+  const w=280, h=220;
+  let shapes='';
+
+  if(item.cat==='amigurumi') {
+    if(item.id===1) { // frog
+      shapes=`
+        <rect width="${w}" height="${h}" fill="${c4}"/>
+        <ellipse cx="${w/2}" cy="${h*0.58}" rx="${w*0.28}" ry="${h*0.28}" fill="${c1}"/>
+        <circle cx="${w*0.38}" cy="${h*0.38}" r="${h*0.1}" fill="${c1}"/>
+        <circle cx="${w*0.62}" cy="${h*0.38}" r="${h*0.1}" fill="${c1}"/>
+        <circle cx="${w*0.38}" cy="${h*0.38}" r="${h*0.06}" fill="${c5}"/>
+        <circle cx="${w*0.62}" cy="${h*0.38}" r="${h*0.06}" fill="${c5}"/>
+        <circle cx="${w*0.42}" cy="${h*0.36}" r="3" fill="white"/>
+        <circle cx="${w*0.66}" cy="${h*0.36}" r="3" fill="white"/>
+        <path d="M${w*0.43} ${h*0.62} Q${w/2} ${h*0.68} ${w*0.57} ${h*0.62}" stroke="${c5}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="${w/2}" cy="${h*0.78}" rx="${w*0.22}" ry="${h*0.1}" fill="${c2}" opacity="0.5"/>
+        <rect x="${w*0.28}" y="${h*0.82}" width="${w*0.1}" height="${h*0.1}" rx="4" fill="${c2}"/>
+        <rect x="${w*0.62}" y="${h*0.82}" width="${w*0.1}" height="${h*0.1}" rx="4" fill="${c2}"/>
+      `;
+    } else if(item.id===3) { // strawberry
+      shapes=`
+        <rect width="${w}" height="${h}" fill="${c4}"/>
+        <ellipse cx="${w/2}" cy="${h*0.58}" rx="${w*0.22}" ry="${h*0.28}" fill="${c1}"/>
+        <path d="M${w*0.28} ${h*0.3} Q${w/2} ${h*0.18} ${w*0.72} ${h*0.3}" fill="${c3}"/>
+        <ellipse cx="${w*0.36}" cy="${h*0.25}" rx="${w*0.07}" ry="${h*0.1}" fill="${c3}" transform="rotate(-15,${w*0.36},${h*0.25})"/>
+        <ellipse cx="${w*0.64}" cy="${h*0.25}" rx="${w*0.07}" ry="${h*0.1}" fill="${c3}" transform="rotate(15,${w*0.64},${h*0.25})"/>
+        ${[...Array(8)].map((_,i)=>`<ellipse cx="${w*0.35+i*w*0.04}" cy="${h*(0.45+Math.floor(i/4)*0.15)}" rx="3" ry="4" fill="${c4}" opacity="0.7"/>`).join('')}
+        <circle cx="${w*0.43}" cy="${h*0.58}" r="3" fill="${c5}" opacity="0.4"/>
+        <circle cx="${w*0.57}" cy="${h*0.58}" r="3" fill="${c5}" opacity="0.4"/>
+      `;
+    } else if(item.id===5) { // bunny
+      shapes=`
+        <rect width="${w}" height="${h}" fill="${c3}"/>
+        <ellipse cx="${w*0.38}" cy="${h*0.28}" rx="${w*0.07}" ry="${h*0.2}" fill="${c1}"/>
+        <ellipse cx="${w*0.62}" cy="${h*0.28}" rx="${w*0.07}" ry="${h*0.2}" fill="${c1}"/>
+        <ellipse cx="${w*0.38}" cy="${h*0.3}" rx="${w*0.04}" ry="${h*0.14}" fill="${c4}" opacity="0.6"/>
+        <ellipse cx="${w*0.62}" cy="${h*0.3}" rx="${w*0.04}" ry="${h*0.14}" fill="${c4}" opacity="0.6"/>
+        <circle cx="${w/2}" cy="${h*0.52}" r="${h*0.22}" fill="${c1}"/>
+        <ellipse cx="${w*0.44}" cy="${h*0.5}" rx="4" ry="5" fill="${c2}"/>
+        <ellipse cx="${w*0.56}" cy="${h*0.5}" rx="4" ry="5" fill="${c2}"/>
+        <circle cx="${w/2}" cy="${h*0.56}" r="4" fill="${c4}" opacity="0.5"/>
+        <path d="M${w*0.44} ${h*0.6} Q${w/2} ${h*0.65} ${w*0.56} ${h*0.6}" stroke="${c2}" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="${w/2}" cy="${h*0.76}" rx="${w*0.24}" ry="${h*0.12}" fill="${c1}"/>
+      `;
+    } else { // ghost
+      shapes=`
+        <rect width="${w}" height="${h}" fill="#d8d8e8"/>
+        <path d="M${w*0.3} ${h*0.75} Q${w*0.3} ${h*0.25} ${w/2} ${h*0.2} Q${w*0.7} ${h*0.25} ${w*0.7} ${h*0.75} Q${w*0.6} ${h*0.65} ${w/2} ${h*0.75} Q${w*0.4} ${h*0.65} ${w*0.3} ${h*0.75}Z" fill="${c1}"/>
+        <ellipse cx="${w*0.43}" cy="${h*0.48}" rx="6" ry="7" fill="${c3}"/>
+        <ellipse cx="${w*0.57}" cy="${h*0.48}" rx="6" ry="7" fill="${c3}"/>
+        <ellipse cx="${w*0.44}" cy="${h*0.47}" rx="3" ry="3.5" fill="white"/>
+        <ellipse cx="${w*0.58}" cy="${h*0.47}" rx="3" ry="3.5" fill="white"/>
+        <path d="M${w*0.44} ${h*0.56} Q${w/2} ${h*0.6} ${w*0.56} ${h*0.56}" stroke="${c3}" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="${w*0.3}" cy="${h*0.2}" r="3" fill="rgba(180,180,220,0.5)"/>
+        <circle cx="${w*0.7}" cy="${h*0.18}" r="2" fill="rgba(180,180,220,0.5)"/>
+        <text x="${w/2}" y="${h*0.9}" text-anchor="middle" font-size="13" fill="${c3}" opacity="0.5">boo!</text>
+      `;
+    }
+  } else if(item.cat==='wearable') {
+    shapes=`
+      <rect width="${w}" height="${h}" fill="${c4}"/>
+      <rect x="${w*0.15}" y="${h*0.12}" width="${w*0.7}" height="${h*0.75}" rx="${h*0.08}" fill="${c1}"/>
+      ${[...Array(7)].map((_,i)=>`<rect x="${w*0.15}" y="${h*(0.12+i*0.11)}" width="${w*0.7}" height="${h*0.04}" rx="${h*0.02}" fill="${c2}" opacity="0.35"/>`).join('')}
+      <rect x="${w*0.3}" y="${h*0.04}" width="${w*0.4}" height="${h*0.14}" rx="${h*0.06}" fill="${c2}" opacity="0.6"/>
+      <path d="M${w*0.35} ${h*0.16} Q${w/2} ${h*0.28} ${w*0.65} ${h*0.16}" stroke="${c3}" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <text x="${w/2}" y="${h*0.93}" text-anchor="middle" font-size="11" fill="${c3}" font-family="serif" font-style="italic" opacity="0.7">✦ cosy ✦</text>
+    `;
+  } else if(item.cat==='bag') {
+    if(item.id===4) { // market bag
+      shapes=`
+        <rect width="${w}" height="${h}" fill="${c4}"/>
+        <rect x="${w*0.18}" y="${h*0.28}" width="${w*0.64}" height="${h*0.62}" rx="${h*0.06}" fill="none" stroke="${c1}" stroke-width="2.5"/>
+        ${[...Array(6)].map((_,i)=>`<line x1="${w*0.18}" y1="${h*(0.28+i*0.1)}" x2="${w*0.82}" y2="${h*(0.28+i*0.1)}" stroke="${c1}" stroke-width="1.5" opacity="0.5"/>`).join('')}
+        ${[...Array(7)].map((_,i)=>`<line x1="${w*(0.18+i*0.11)}" y1="${h*0.28}" x2="${w*(0.18+i*0.11)}" y2="${h*0.9}" stroke="${c1}" stroke-width="1.2" opacity="0.4"/>`).join('')}
+        <path d="M${w*0.35} ${h*0.28} Q${w*0.35} ${h*0.1} ${w*0.35} ${h*0.1}" stroke="${c2}" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M${w*0.65} ${h*0.28} Q${w*0.65} ${h*0.1} ${w*0.65} ${h*0.1}" stroke="${c2}" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M${w*0.35} ${h*0.1} Q${w/2} ${h*0.04} ${w*0.65} ${h*0.1}" stroke="${c2}" stroke-width="5" fill="none" stroke-linecap="round"/>
+      `;
+    } else { // bucket bag
+      shapes=`
+        <rect width="${w}" height="${h}" fill="${c3}"/>
+        <path d="M${w*0.22} ${h*0.25} L${w*0.18} ${h*0.85} Q${w*0.18} ${h*0.92} ${w/2} ${h*0.92} Q${w*0.82} ${h*0.92} ${w*0.82} ${h*0.85} L${w*0.78} ${h*0.25} Z" fill="${c1}"/>
+        <ellipse cx="${w/2}" cy="${h*0.25}" rx="${w*0.28}" ry="${h*0.06}" fill="${c2}"/>
+        ${[...Array(5)].map((_,i)=>`<ellipse cx="${w/2}" cy="${h*(0.32+i*0.12)}" rx="${w*(0.26-i*0.01)}" ry="${h*0.02}" fill="${c2}" opacity="0.25"/>`).join('')}
+        <path d="M${w*0.35} ${h*0.25} Q${w*0.32} ${h*0.1} ${w*0.32} ${h*0.08}" stroke="${c4}" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M${w*0.65} ${h*0.25} Q${w*0.68} ${h*0.1} ${w*0.68} ${h*0.08}" stroke="${c4}" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M${w*0.32} ${h*0.08} Q${w/2} ${h*0.02} ${w*0.68} ${h*0.08}" stroke="${c4}" stroke-width="4" fill="none" stroke-linecap="round"/>
+      `;
+    }
+  } else if(item.cat==='home') { // coasters
+    shapes=`
+      <rect width="${w}" height="${h}" fill="${c4}" opacity="0.3"/>
+      <rect width="${w}" height="${h}" fill="${c3}" opacity="0.2"/>
+      ${[{x:0.22,y:0.15},{x:0.6,y:0.12},{x:0.18,y:0.58},{x:0.58,y:0.56}].map((pos,i)=>`
+        <g transform="translate(${w*pos.x},${h*pos.y})">
+          ${[...Array(8)].map((_,j)=>`<ellipse cx="${Math.cos(j*Math.PI/4)*28}" cy="${Math.sin(j*Math.PI/4)*28}" rx="14" ry="8" fill="${j%2===0?c1:c3}" opacity="0.9" transform="rotate(${j*45},${Math.cos(j*Math.PI/4)*28},${Math.sin(j*Math.PI/4)*28})"/>`).join('')}
+          <circle cx="0" cy="0" r="12" fill="${c2}"/>
+          <circle cx="0" cy="0" r="6" fill="${c1}" opacity="0.8"/>
+        </g>
+      `).join('')}
+    `;
+  }
+
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">${shapes}</svg>`;
+}
+
+// Build shop grid
+const grid = document.getElementById('shopGrid');
+shopItems.forEach(item => {
+  const card = document.createElement('div');
+  card.className = 'shop-card';
+  card.dataset.cat = item.cat;
+
+  card.innerHTML = `
+    <div class="shop-img-wrap">${makeItemArt(item)}</div>
+    ${!item.available ? '<div class="ribbon-sold">Sold Out</div>' : ''}
+    ${item.available ? `<div class="badge-avail">Available</div>` : ''}
+    <button class="shop-heart" data-id="${item.id}" title="Add to wishlist">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 12 C7 12 1 8 1 4.5 A3 3 0 0 1 7 3.2 A3 3 0 0 1 13 4.5 C13 8 7 12 7 12Z" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
+        </button>
+    <div class="shop-info">
+      <div class="shop-name">${item.name}</div>
+      <div class="shop-cat">${item.catLabel}</div>
+      <div class="shop-desc">${item.desc.length>80?item.desc.slice(0,80)+'…':item.desc}</div>
+      <div class="shop-footer">
+        <div class="shop-price ${item.available?'':'sold'}">$${item.price}</div>
+        <button class="shop-buy" ${item.available?'':'disabled'}>${item.available?'Order ✦':'Sold Out'}</button>
+      </div>
+    </div>
+  `;
+
+  card.querySelector('.shop-buy').addEventListener('click', e => {
+    e.stopPropagation();
+    openModal(item);
+  });
+  card.querySelector('.shop-heart').addEventListener('click', e => {
+    e.stopPropagation();
+    const btn = e.currentTarget;
+    const loved = btn.classList.toggle('loved');
+    btn.innerHTML = loved
+      ? '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 12 C7 12 1 8 1 4.5 A3 3 0 0 1 7 3.2 A3 3 0 0 1 13 4.5 C13 8 7 12 7 12Z" stroke="#c05070" stroke-width="1.3" fill="#c05070"/></svg>'
+      : '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 12 C7 12 1 8 1 4.5 A3 3 0 0 1 7 3.2 A3 3 0 0 1 13 4.5 C13 8 7 12 7 12Z" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>';
+  });
+  card.addEventListener('click', () => openModal(item));
+  grid.appendChild(card);
+});
+
+// Modal
+function openModal(item) {
+  document.getElementById('modalImgWrap').innerHTML = makeItemArt({...item});
+  document.getElementById('modalName').textContent = item.name;
+  document.getElementById('modalCat').textContent = item.catLabel;
+  document.getElementById('modalDesc').textContent = item.desc;
+  document.getElementById('modalDetails').innerHTML = item.details.map(d=>`<div class="modal-detail"><strong>${d.label}</strong>${d.val}</div>`).join('');
+  const priceEl = document.getElementById('modalPrice');
+  priceEl.textContent = '$' + item.price;
+  priceEl.className = 'modal-price' + (item.available ? '' : ' sold');
+  const buyBtn = document.getElementById('modalBuy');
+  buyBtn.textContent = item.available ? 'Order via DM ✦' : 'Sold — Custom Order Available';
+  buyBtn.style.opacity = item.available ? '1' : '0.6';
+  document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalBg').addEventListener('click', e => { if(e.target===document.getElementById('modalBg')) closeModal(); });
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ===== CURSOR =====
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function anim(){ rx+=(mx-rx)*0.14; ry+=(my-ry)*0.14; dot.style.left=mx+'px'; dot.style.top=my+'px'; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(anim); })();
+document.querySelectorAll('a,button,.shop-card,.price-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { ring.style.width='50px'; ring.style.height='50px'; ring.style.borderColor='var(--teal)'; });
+  el.addEventListener('mouseleave', () => { ring.style.width='34px'; ring.style.height='34px'; ring.style.borderColor='var(--sage)'; });
+});
+
+// ===== FLOATING PARTICLES =====
+const floatersEl = document.getElementById('floaters');
+const syms = ['✦','✧','✿','❀','◇','○','•'];
+for(let i=0;i<22;i++){
+  const el = document.createElement('div');
+  el.className = 'floater';
+  el.textContent = syms[Math.floor(Math.random()*syms.length)];
+  el.style.left = Math.random()*100+'%';
+  el.style.fontSize = (Math.random()*14+7)+'px';
+  el.style.color = Math.random()>0.5
+    ? `hsl(150,${Math.floor(Math.random()*30+40)}%,${Math.floor(Math.random()*20+50)}%)`
+    : `hsl(38,${Math.floor(Math.random()*30+50)}%,${Math.floor(Math.random()*20+55)}%)`;
+  el.style.animationDuration = (Math.random()*12+8)+'s';
+  el.style.animationDelay = (Math.random()*15)+'s';
+  floatersEl.appendChild(el);
+}
+
+// ===== SCROLL REVEAL =====
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.stagger,.stagger-shop').forEach(el => obs.observe(el));
+
+// NAV shrink
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.padding = window.scrollY>60 ? '0.6rem 3rem' : '1rem 3rem';
+});
+</script>
+</body>
+</html>
