@@ -1174,5 +1174,18 @@ window.addEventListener('scroll', () => {
   document.querySelector('nav').style.padding = window.scrollY>60 ? '0.6rem 3rem' : '1rem 3rem';
 });
 </script>
+<script>
+window._orderItem = function(item) {
+  // Map firebase-data item fields to what openModal expects
+  openModal({
+    name:      item.title,
+    catLabel:  item.cat || '',
+    desc:      item.desc || '',
+    price:     item.price || 0,
+    available: item.available !== false,
+    details:   [],  // add fields here if you store them in Firestore
+  });
+};
+</script>
 </body>
 </html>
