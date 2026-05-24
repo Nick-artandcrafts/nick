@@ -34,25 +34,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== CURSOR ===== */
-.cursor-dot {
-  width: 8px; height: 8px;
-  background: var(--teal);
-  border-radius: 50%;
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 9999;
-  transform: translate(-50%,-50%);
-}
-.cursor-ring {
-  width: 34px; height: 34px;
-  border: 1.5px solid var(--sage);
-  border-radius: 50%;
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 9998;
-  transform: translate(-50%,-50%);
-  transition: transform 0.18s ease, width 0.3s, height 0.3s, border-color 0.3s;
-  opacity: 0.7;
-}
 
 /* ===== NAV ===== */
 nav {
@@ -597,12 +578,69 @@ footer a { color: var(--mint); text-decoration: none; }
   section { padding: 4rem 1.2rem; }
   .modal-body { padding: 1.2rem 1.4rem; }
 }
+
+/* ===== MOBILE NAV ===== */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  z-index: 110;
+}
+.nav-hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--deep);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(250,253,248,0.98);
+  backdrop-filter: blur(16px);
+  z-index: 105;
+  padding: 5rem 2rem 2rem;
+  flex-direction: column;
+  gap: 0;
+  border-bottom: 1px solid rgba(142,196,168,0.25);
+  transform: translateY(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.mobile-menu.open {
+  display: flex;
+  transform: translateY(0);
+}
+.mobile-menu a {
+  font-size: 1.1rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--mid); text-decoration: none;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(142,196,168,0.2);
+  transition: color 0.25s;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--teal); }
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-back  { display: none; }
+  .nav-hamburger { display: flex; }
+}
 </style>
 </head>
 <body>
 
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 <div class="floaters" id="floaters"></div>
 
 <!-- MODAL -->
@@ -634,7 +672,19 @@ footer a { color: var(--mint); text-decoration: none; }
     <li><a href="#tos">Terms</a></li>
   </ul>
   <a class="nav-back" href="index.html">← All of Nick</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"   onclick="closeMobileMenu()">About</a>
+  <a href="#pricing" onclick="closeMobileMenu()">Customs</a>
+  <a href="#shop"    onclick="closeMobileMenu()">Shop</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  <a href="#tos"     onclick="closeMobileMenu()">Terms</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -789,7 +839,7 @@ footer a { color: var(--mint); text-decoration: none; }
       <span class="section-tag" style="font-size:1.1rem;font-weight:700;font-style:normal;">✦ Custom Order Pricing</span>
       <h2 class="section-title">Made Just <em>for You</em></h2>
       <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;font-weight:600;color:var(--mid);max-width:500px;margin:0 auto;">
-        All custom work is priced to reflect the time, yarn, and love that goes in. Ready-made items have individual prices in the shop below.
+        All custom work is priced to reflect the time, yarn, and effort that goes in. Ready-made items have individual prices in the shop below.
       </p>
     </div>
 
@@ -894,52 +944,13 @@ footer a { color: var(--mint); text-decoration: none; }
   <div class="shop-section">
     <div class="shop-intro reveal">
       <span class="section-tag" style="font-size:1.1rem;font-weight:700;font-style:normal;">✦ Ready-Made Shop</span>
-      <h2 class="section-title">The <em>Collection</em></h2>
+      <h2 class="section-title">My <em>Collection</em></h2>
       <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mid);">
-        One-of-a-kind pieces ready to go — each priced individually
+        Crafted with care & readdy to ship
       </p>
     </div>
 
     <div class="shop-grid stagger-shop" id="shopGrid"></div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="contact-section">
-  <div class="contact-inner">
-    <span class="section-tag">✦ Let's Connect</span>
-    <h2 class="section-title">Find Nick</h2>
-    <p class="contact-sub">For orders, custom requests, or just to share your crochet pics —<br>Nick loves hearing from you</p>
-    <div class="social-links reveal stagger">
-      <a href="#" class="social-link insta" data-nick="insta-url">
-        <div class="social-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="12" rx="3" stroke="white" stroke-width="1.5"/><circle cx="10" cy="11" r="3" stroke="white" stroke-width="1.4"/><path d="M7 5 L8.5 3 H11.5 L13 5" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div>
-          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Instagram</div>
-          <div>@nick.crafts.heaven</div>
-        </div>
-      </a>
-      <a href="#" class="social-link fb" data-nick="fb-url">
-        <div class="social-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M11 17V11h2.5l0.5-3H11V6.5C11 5.7 11.3 5 12.5 5H14V2.3C13.5 2.2 12.6 2 11.5 2C9.1 2 7.5 3.5 7.5 6.2V8H5v3h2.5v6H11Z" fill="white"/></svg>
-        </div>
-        <div>
-          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Facebook</div>
-          <div>Nick Crafts Heaven</div>
-        </div>
-      </a>
-      <a href="#" class="social-link discord">
-        <div class="social-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 3C5 3.5 3 5.5 2.5 8L2 13c0 1 1 1.5 1.8 1L5 13h10l1.2 1c.8.5 1.8 0 1.8-1L17.5 8C17 5.5 15 3.5 12.5 3L12 5H8L7.5 3Z" stroke="white" stroke-width="1.4" stroke-linejoin="round"/><circle cx="7.5" cy="10" r="1" fill="white"/><circle cx="12.5" cy="10" r="1" fill="white"/></svg>
-        </div>
-        <div>
-          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Discord</div>
-          <div data-nick="discord">nickcrafts#0002</div>
-        </div>
-      </a>
-    </div>
-    <p class="contact-note" data-nick="contact-note">DMs open for custom orders ✦ Usually replies within 24 hours</p>
   </div>
 </section>
 
@@ -1018,6 +1029,45 @@ footer a { color: var(--mint); text-decoration: none; }
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <span class="section-tag">✦ Let's Connect</span>
+    <h2 class="section-title">Find Nick</h2>
+    <p class="contact-sub">For orders, custom requests, or just to share your crochet pics —<br>Nick loves hearing from you</p>
+    <div class="social-links reveal stagger">
+      <a href="#" class="social-link insta" data-nick="insta-url">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="12" rx="3" stroke="white" stroke-width="1.5"/><circle cx="10" cy="11" r="3" stroke="white" stroke-width="1.4"/><path d="M7 5 L8.5 3 H11.5 L13 5" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Instagram</div>
+          <div>@nick.crafts.heaven</div>
+        </div>
+      </a>
+      <a href="#" class="social-link fb" data-nick="fb-url">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M11 17V11h2.5l0.5-3H11V6.5C11 5.7 11.3 5 12.5 5H14V2.3C13.5 2.2 12.6 2 11.5 2C9.1 2 7.5 3.5 7.5 6.2V8H5v3h2.5v6H11Z" fill="white"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Facebook</div>
+          <div>Nick Crafts Heaven</div>
+        </div>
+      </a>
+      <a href="#" class="social-link discord">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 3C5 3.5 3 5.5 2.5 8L2 13c0 1 1 1.5 1.8 1L5 13h10l1.2 1c.8.5 1.8 0 1.8-1L17.5 8C17 5.5 15 3.5 12.5 3L12 5H8L7.5 3Z" stroke="white" stroke-width="1.4" stroke-linejoin="round"/><circle cx="7.5" cy="10" r="1" fill="white"/><circle cx="12.5" cy="10" r="1" fill="white"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Discord</div>
+          <div data-nick="discord">nickcrafts#0002</div>
+        </div>
+      </a>
+    </div>
+    <p class="contact-note" data-nick="contact-note">DMs open for custom orders ✦ Usually replies within 24 hours</p>
   </div>
 </section>
 
@@ -1259,17 +1309,6 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-// ===== CURSOR =====
-const dot = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
-(function anim(){ rx+=(mx-rx)*0.14; ry+=(my-ry)*0.14; dot.style.left=mx+'px'; dot.style.top=my+'px'; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(anim); })();
-document.querySelectorAll('a,button,.shop-card,.price-card').forEach(el => {
-  el.addEventListener('mouseenter', () => { ring.style.width='50px'; ring.style.height='50px'; ring.style.borderColor='var(--teal)'; });
-  el.addEventListener('mouseleave', () => { ring.style.width='34px'; ring.style.height='34px'; ring.style.borderColor='var(--sage)'; });
-});
-
 // ===== FLOATING PARTICLES =====
 const floatersEl = document.getElementById('floaters');
 const syms = ['✦','✧','✿','❀','◇','○','•'];
@@ -1331,6 +1370,18 @@ window._orderItem = function(item) {
   document.getElementById('modalBg').classList.add('open');
   document.body.style.overflow = 'hidden';
 };
+
+// ===== MOBILE NAV =====
+const hamburger = document.getElementById('navHamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+function closeMobileMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
 </script>
 </body>
 </html>
