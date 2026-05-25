@@ -603,7 +603,7 @@ footer a { color: var(--mint); text-decoration: none; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .mobile-menu {
-  display: none;
+  display: flex;
   position: fixed;
   top: 0; left: 0; right: 0;
   background: rgba(250,253,248,0.98);
@@ -613,12 +613,15 @@ footer a { color: var(--mint); text-decoration: none; }
   flex-direction: column;
   gap: 0;
   border-bottom: 1px solid rgba(142,196,168,0.25);
-  transform: translateY(-100%);
+  transform: translateY(-110%);
   transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+  visibility: hidden;
 }
 .mobile-menu.open {
-  display: flex;
   transform: translateY(0);
+  pointer-events: auto;
+  visibility: visible;
 }
 .mobile-menu a {
   font-size: 1.1rem; font-weight: 600;
@@ -655,7 +658,7 @@ footer a { color: var(--mint); text-decoration: none; }
       <div class="modal-details" id="modalDetails"></div>
       <div class="modal-footer">
         <div class="modal-price" id="modalPrice"></div>
-        <button class="btn btn-primary" id="modalBuy">Order via DM ✦</button>
+        <button class="btn btn-primary" id="modalBuy" onclick="closeModal();document.getElementById('contact').scrollIntoView({behavior:'smooth'});">Order via DM ✦</button>
       </div>
     </div>
   </div>
@@ -729,7 +732,7 @@ footer a { color: var(--mint); text-decoration: none; }
 
   <div class="hero-content">
     <p class="hero-eyebrow" style="font-size:1.25rem;font-weight:700;font-style:normal;">✦ Handcrafted Creations ✦</p>
-    <h1 class="hero-title"><span data-nick="name">Nick Crafts</span><br><em>Heaven</em></h1>
+    <h1 class="hero-title"><span data-nick="name">Nick Crafts</span><br><em>Where creativity meets reality</em></h1>
     <p class="hero-sub">Handmade pieces crafted with care<br> Soft details and careful stitches</p>
     <div class="hero-cta">
       <a href="#shop" class="btn btn-primary">My Shop</a>
@@ -958,7 +961,7 @@ footer a { color: var(--mint); text-decoration: none; }
 <section id="tos" class="tos-section">
   <div class="tos-inner">
     <div class="tos-intro reveal">
-      <span class="section-tag">✦ Before You Order</span>
+      <span class="section-tag" style="color:#1e5c4a;font-weight:700;opacity:1;">✦ Before You Order</span>
       <h2 class="section-title">Terms of <em>Service</em></h2>
       <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mid);">
         Please take a moment to read through these before placing a custom order — thank you! ✦
@@ -1057,7 +1060,7 @@ footer a { color: var(--mint); text-decoration: none; }
           <div>Nick Crafts Heaven</div>
         </div>
       </a>
-      <a href="#" class="social-link discord">
+      <a href="#" class="social-link discord" id="discordLink">
         <div class="social-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 3C5 3.5 3 5.5 2.5 8L2 13c0 1 1 1.5 1.8 1L5 13h10l1.2 1c.8.5 1.8 0 1.8-1L17.5 8C17 5.5 15 3.5 12.5 3L12 5H8L7.5 3Z" stroke="white" stroke-width="1.4" stroke-linejoin="round"/><circle cx="7.5" cy="10" r="1" fill="white"/><circle cx="12.5" cy="10" r="1" fill="white"/></svg>
         </div>
@@ -1299,6 +1302,7 @@ function openModal(item) {
   const buyBtn = document.getElementById('modalBuy');
   buyBtn.textContent = item.available ? 'Order via DM ✦' : 'Sold — Custom Order Available';
   buyBtn.style.opacity = item.available ? '1' : '0.6';
+  buyBtn.onclick = function() { closeModal(); document.getElementById('contact').scrollIntoView({behavior:'smooth'}); };
   document.getElementById('modalBg').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1366,6 +1370,7 @@ window._orderItem = function(item) {
   const buyBtn = document.getElementById('modalBuy');
   buyBtn.textContent = avail ? 'Order via DM ✦' : 'Sold — Custom Order Available';
   buyBtn.style.opacity = avail ? '1' : '0.6';
+  buyBtn.onclick = function() { closeModal(); document.getElementById('contact').scrollIntoView({behavior:'smooth'}); };
 
   document.getElementById('modalBg').classList.add('open');
   document.body.style.overflow = 'hidden';
